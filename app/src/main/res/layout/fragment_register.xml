@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.login.RegisterFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <io.github.florent37.shapeofview.shapes.ArcView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:elevation="4dp"
+                app:shape_arc_height="20dp"
+                app:shape_arc_position="bottom"
+                >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/primaryColor" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register_title"
+                    android:textColor="@color/white"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:textSize="22sp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleImageProfile"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:src="@drawable/ic_person"
+                    app:civ_circle_background_color="@color/colorGray"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    app:civ_border_color="@color/white"
+                    android:contentDescription="@string/desc"
+                    app:civ_border_width="5dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_edit"
+                    android:layout_gravity="center"
+                    app:civ_border_color="@color/colorDarkGray"
+                    app:civ_border_width="5dp"
+                    app:civ_circle_background_color="@color/colorDarkGray"
+                    android:layout_marginStart="50dp"
+                    android:contentDescription="@string/desc"
+                    android:layout_marginTop="80dp" />
+
+            </io.github.florent37.shapeofview.shapes.ArcView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="40dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_person_pin"
+                    app:tint="@color/colorGray"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/desc" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/username_hint_required"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="5dp"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_email"
+                    app:tint="@color/colorGray"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/desc" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/email_hint_require"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_lock"
+                    android:layout_marginTop="15dp"
+                    app:tint="@color/colorGray"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/desc" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/pass_hint_require"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_lock"
+                    android:layout_marginTop="15dp"
+                    app:tint="@color/colorGray"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/desc" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutConfirmPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/confirm_pass_require"
+                        android:inputType="textPassword" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="left"
+                tools:ignore="RtlHardcoded">
+
+                <CheckBox
+                    android:id="@+id/checkboxTerms"
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terms_of_services_string"
+                    android:tag="@string/accept_terms_and_conditions"
+                    />
+
+                <TextView
+                    android:id="@+id/textViewTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="@string/terms_of_services"
+                    android:layout_marginStart="5dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textStyle="bold"
+                    android:maxLines="3"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="left">
+
+                <CheckBox
+                    android:id="@+id/checkboxPolicy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/policy_string"
+                    android:textSize="14sp"
+                    android:tag="@string/accept_policy" />
+
+                <TextView
+                    android:id="@+id/textViewPolicy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/privacy_policy"
+                    android:layout_marginStart="5dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/primaryDarkColor"
+                    android:textStyle="bold"
+                    android:maxLines="3"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/register_button"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/primaryColor"
+                android:layout_gravity="bottom"
+                android:textColor="@color/white"
+                android:layout_margin="20dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageBack"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/ic_arrow_left"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/desc"
+        />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

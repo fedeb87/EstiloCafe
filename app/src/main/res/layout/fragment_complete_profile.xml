@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginTop="-32dp"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.login.completeProfile.CompleteProfileFragment">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="308dp">
+
+                <io.github.florent37.shapeofview.shapes.ArcView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:elevation="4dp"
+                    app:shape_arc_height="20dp"
+                    app:shape_arc_position="bottom"
+                    >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/primaryColor" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/complete_profile_title"
+                        android:textColor="@color/white"
+                        android:textAlignment="center"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="22sp"
+                        android:layout_marginBottom="20dp"/>
+
+                </io.github.florent37.shapeofview.shapes.ArcView>
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleImageProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/ic_person_grey"
+                    android:layout_gravity="top|center"
+                    android:elevation="4dp"
+                    android:layout_marginTop="140dp"
+                    app:civ_border_color="#eeeeee"
+                    app:civ_circle_background_color="@color/white"
+                    app:civ_border_width="5dp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_edit"
+                    android:layout_gravity="top|center"
+                    app:civ_border_color="@color/colorDarkGray"
+                    app:civ_border_width="5dp"
+                    android:elevation="4dp"
+                    android:layout_marginStart="62dp"
+                    app:civ_circle_background_color="@color/colorDarkGray"
+                    android:layout_marginTop="240dp" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="30dp"
+                >
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:tint="@color/colorGray"
+                    android:src="@drawable/ic_person_pin"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="5dp"
+                    android:contentDescription="@string/desc" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayoutName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textInputName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/username_hint_required"
+                        android:inputType="textEmailAddress" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="32dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="left">
+
+                <CheckBox
+                    android:id="@+id/checkboxTerms"
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terms_of_services_string" />
+
+                <TextView
+                    android:id="@+id/textViewTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="@string/terms_of_services"
+                    android:layout_marginStart="5dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/primaryColor"
+                    android:textStyle="bold"
+                    android:maxLines="3"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:gravity="left">
+
+                <CheckBox
+                    android:id="@+id/checkboxPolicy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/policy_string"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textViewPolicy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/privacy_policy"
+                    android:layout_marginStart="5dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/primaryColor"
+                    android:textStyle="bold"
+                    android:maxLines="3"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm_button"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/primaryColor"
+                android:textColor="@color/white"
+                android:layout_marginLeft="32dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="32dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

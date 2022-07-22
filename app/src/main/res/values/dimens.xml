@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="vertical_margin">12dp</dimen>
+    <dimen name="vertical_margin_half">6dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+
+    <dimen name="seek_bar_thickness">4dp</dimen>
+    <dimen name="seek_bar_thumb_size">20dp</dimen>
+
+    <!-- size for large text -->
+    <dimen name="large_text">24sp</dimen>
+
+    <dimen name="header_main_content">104dp</dimen>
+
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.federicoberon.estilocafe.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_register"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_completeProfile"
+            app:destination="@id/completeProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.federicoberon.estilocafe.ui.login.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/completeProfileFragment"
+        android:name="com.federicoberon.estilocafe.ui.login.completeProfile.CompleteProfileFragment"
+        android:label="fragment_complete_profile"
+        tools:layout="@layout/fragment_complete_profile" />
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="com.federicoberon.estilocafe.ui.splash.SplashActivity"
+        android:label="activity_splash"
+        tools:layout="@layout/activity_splash" >
+
+    </activity>
+</navigation>
