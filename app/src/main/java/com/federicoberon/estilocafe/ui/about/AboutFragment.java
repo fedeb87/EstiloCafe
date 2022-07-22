@@ -65,8 +65,8 @@ public class AboutFragment extends Fragment {
                     Bundle args = new Bundle();
                     args.putLong(TYPE_OF_CONTENT, 1L);
                     // TODO: 22/07/2022 hacer los navigation, ver bien como tener uno principal y varios secundarios
-                    Navigation.findNavController(
-                            binding.getRoot()).navigate(R.id.action_aboutFragment_to_termsDialogFragment, args);
+                    /*Navigation.findNavController(
+                            binding.getRoot()).navigate(R.id.action_aboutFragment_to_termsDialogFragment, args);*/
                 })
                 .addDonateAction(donateIntent)
                 .setWrapScrollView(true)

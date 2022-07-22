@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "102550785597",
+    "project_id": "estilocafe-9ad27",
+    "storage_bucket": "estilocafe-9ad27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102550785597:android:32b4c1e7e703f51c2ee454",
+        "android_client_info": {
+          "package_name": "com.federicoberon.estilocafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102550785597-8tdavfuluk5n37onkndq9pjus5amjffh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.federicoberon.estilocafe",
+            "certificate_hash": "f869842a57f65981a48993e1bb5c6ee9f44731d4"
+          }
+        },
+        {
+          "client_id": "102550785597-bbctlih7p1tre5lf8kq3tl679e5ov0fq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVZEtet1idm_g3b_07RbyjtqYBo7wunrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102550785597-bbctlih7p1tre5lf8kq3tl679e5ov0fq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.os.Build;
 
 import com.federicoberon.estilocafe.di.ApplicationComponent;
+import com.federicoberon.estilocafe.di.DaggerApplicationComponent;
 import com.federicoberon.estilocafe.di.module.ApplicationModule;
 import com.federicoberon.estilocafe.di.module.DatabaseModule;
 import com.federicoberon.estilocafe.utils.NetworkMonitoringUtil;

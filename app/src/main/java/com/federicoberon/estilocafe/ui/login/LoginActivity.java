@@ -2,6 +2,7 @@ package com.federicoberon.estilocafe.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,8 @@ public class LoginActivity extends BaseActivity implements ActivityCompat.OnRequ
 
         ((EstiloCafeApplication) getApplicationContext())
                 .appComponent.inject(this);
+
+        Log.w("<<< MIO >>>", "On create del LoginActivity");
 
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());

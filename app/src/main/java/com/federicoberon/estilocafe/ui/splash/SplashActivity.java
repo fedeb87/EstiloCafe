@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.federicoberon.estilocafe.BaseActivity;
@@ -16,16 +17,12 @@ import com.federicoberon.estilocafe.databinding.ActivitySplashBinding;
 import com.federicoberon.estilocafe.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseUser;
 
-import javax.inject.Inject;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends BaseActivity {
 
     private static final String LOG_TAG = "Splash Activity";
     private ActivitySplashBinding binding;
-
-    @Inject
-
 
     @SuppressLint("CheckResult")
     @Override
@@ -36,6 +33,7 @@ public class SplashActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
 
+        Log.w("<<< MIO >>>", "On create del SplashActivyt");
         // deleted, only for testing propose
         //restartMaxScores();
 
@@ -55,12 +53,15 @@ public class SplashActivity extends BaseActivity {
 
         FirebaseUser firebaseUser = mViewModel.getUserSession();
         if (firebaseUser != null) {
+            Log.w("<<< MIO >>>", "1");
             mViewModel.saveUserInfo(SplashActivity.this, mViewModel.getUid());
             checkGoHome(firebaseUser.getUid(), binding.getRoot());
         }else{
             // prevent to back to Splash screen
+            Log.w("<<< MIO >>>", "2");
             finish();
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            Log.w("<<< MIO >>>", "3");
         }
 
     }
