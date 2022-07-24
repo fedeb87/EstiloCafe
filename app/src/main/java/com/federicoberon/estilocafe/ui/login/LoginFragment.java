@@ -79,9 +79,6 @@ public class LoginFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        Log.w("<<< MIO >>>", "On create del LoginFragment");
-
         mDialog = new SpotsDialog.Builder()
                 .setContext(requireContext())
                 .setMessage(getResources().getString(

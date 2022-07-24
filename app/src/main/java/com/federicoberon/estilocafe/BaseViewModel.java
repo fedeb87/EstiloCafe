@@ -3,8 +3,6 @@ package com.federicoberon.estilocafe;
 import static com.federicoberon.estilocafe.utils.Constants.EMAIL_KEY;
 import static com.federicoberon.estilocafe.utils.Constants.ENABLE_LOGS;
 import static com.federicoberon.estilocafe.utils.Constants.NICKNAME_KEY;
-import static com.federicoberon.estilocafe.utils.Constants.TOP_SCORE_ANIME_KEY;
-import static com.federicoberon.estilocafe.utils.Constants.TOP_SCORE_MOVIES_AND_SERIES_KEY;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,26 +17,19 @@ import com.federicoberon.estilocafe.repository.AuthRepository;
 import com.federicoberon.estilocafe.repository.ProfileImageRepository;
 import com.federicoberon.estilocafe.utils.AppExecutors;
 import com.federicoberon.estilocafe.utils.StorageUtil;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.inject.Inject;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
 public class BaseViewModel extends ViewModel {
 
     protected final AuthRepository mAuthRepository;
-    private final ProfileImageRepository mProfileImageRepository;
+    protected final ProfileImageRepository mProfileImageRepository;
 
     @Inject
     public SharedPreferences sharedPref;
@@ -92,22 +83,12 @@ public class BaseViewModel extends ViewModel {
             if (documentSnapshot.exists()) {
                 long timestampUser = documentSnapshot.getLong("timeStamp");
 
-                int topScoreAnime = documentSnapshot.contains("topScoreAnime")?
-                        Math.toIntExact(documentSnapshot.getLong("topScoreAnime")):
-                        0;
-
-                int topScoreMoviesAndSeries = documentSnapshot.contains("topScoreMoviesAndSeries")?
-                        Math.toIntExact(documentSnapshot.getLong("topScoreMoviesAndSeries")):
-                        0;
-
                 String image_profile = documentSnapshot.contains("image_profile")?
                         documentSnapshot.getString("image_profile"): null;
 
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString(NICKNAME_KEY, documentSnapshot.getString("nickname"));
                 editor.putString(EMAIL_KEY, documentSnapshot.getString("email"));
-                editor.putInt(TOP_SCORE_ANIME_KEY, topScoreAnime);
-                editor.putInt(TOP_SCORE_MOVIES_AND_SERIES_KEY, topScoreMoviesAndSeries);
                 editor.apply();
 
                 if(image_profile!=null)

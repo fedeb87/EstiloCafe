@@ -33,10 +33,6 @@ public class SplashActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
 
-        Log.w("<<< MIO >>>", "On create del SplashActivyt");
-        // deleted, only for testing propose
-        //restartMaxScores();
-
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(binding.getRoot());
@@ -53,15 +49,12 @@ public class SplashActivity extends BaseActivity {
 
         FirebaseUser firebaseUser = mViewModel.getUserSession();
         if (firebaseUser != null) {
-            Log.w("<<< MIO >>>", "1");
             mViewModel.saveUserInfo(SplashActivity.this, mViewModel.getUid());
             checkGoHome(firebaseUser.getUid(), binding.getRoot());
         }else{
             // prevent to back to Splash screen
-            Log.w("<<< MIO >>>", "2");
             finish();
             startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-            Log.w("<<< MIO >>>", "3");
         }
 
     }

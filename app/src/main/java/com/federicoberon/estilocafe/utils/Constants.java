@@ -14,10 +14,9 @@ public class Constants {
 
     public static String NICKNAME_KEY = "nickname";
     public static final String EMAIL_KEY = "email";
-    public static String TOP_SCORE_ANIME_KEY = "topScoreAnime";
-    public static String TOP_SCORE_MOVIES_AND_SERIES_KEY = "topScoreMoviesAndSeries";
+    public static String PRODUCT_KEY = "product";
 
-    public static String ANIME_CAT = "anime";
+    public static String SEARCH_QUERY_KEY = "query";
     public static String MOVIES_CAT = "movies";
     public static int START_MOVIES = 1000;
     public static int START_ANIMES = 1;

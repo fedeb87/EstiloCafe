@@ -21,13 +21,13 @@ public class TermsDialogFragment extends DialogFragment {
 
     public TermsDialogFragment() {}
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View mView = inflater.inflate(R.layout.fragment_terms_dialog, container);
-
-        int typeOfContent = getArguments().getInt(TYPE_OF_CONTENT);
+        int typeOfContent = 0;
+        if(getArguments()!=null)
+            typeOfContent = getArguments().getInt(TYPE_OF_CONTENT);
 
         initViews(mView);
         configRootView();

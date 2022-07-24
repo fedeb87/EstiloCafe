@@ -30,8 +30,6 @@ public class LoginActivity extends BaseActivity implements ActivityCompat.OnRequ
         ((EstiloCafeApplication) getApplicationContext())
                 .appComponent.inject(this);
 
-        Log.w("<<< MIO >>>", "On create del LoginActivity");
-
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

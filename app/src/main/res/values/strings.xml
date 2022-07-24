@@ -73,7 +73,6 @@
     <string name="accept_policy" translatable="false">He leído y acepto las políticas de privacidad</string>
 
 
-
     <string name="privacy_policy_body">"
 Esta Política de privacidad describe cómo gestionamos y protegemos sus datos personales y las opciones disponibles para usted. Puede proporcionarse información adicional sobre nuestras prácticas de datos personales en los ajustes de producto, términos contractuales o avisos proporcionados antes o en el momento de la recogida de datos.
 
@@ -278,6 +277,17 @@ En la medida en que lo permita la ley aplicable, estos Términos, su objeto y su
 Copyright 2021 - 2022
 All Rights Reserved"</string>
     <string name="brew_personal_desc">Estoy entusiasmado con las tecnologías móviles. Creador de ideas, curioso y amante de la naturaleza.</string>
+    <string name="heading">Heading</string>
+    <string name="subheading">Subheading</string>
+    <string name="more_button">More</string>
+    <string name="pricing">$100</string>
+    <string name="sample_rating">4.5</string>
+    <string name="product_name">Product Name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_to_chart_button">Agregar</string>
+    <string name="transtionname_picture">transitionnamepicture</string>
+    <string name="banner_string">20% off</string>
 
 
 </resources>
