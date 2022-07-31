@@ -4,7 +4,7 @@
     android:id="@+id/card_view"
     style="@style/CardView"
     android:layout_width="match_parent"
-    android:layout_height="240dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
@@ -23,6 +23,7 @@
         android:paddingTop="12dp">
 
         <LinearLayout
+            android:id="@+id/sectionHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -44,17 +45,9 @@
                     android:layout_marginBottom="1dp"
                     android:layout_weight="1"
                     tools:text="@string/heading"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     tools:ignore="NestedWeights" />
-
-                <TextView
-                    android:id="@+id/sub_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    tools:text="@string/subheading"
-                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -66,7 +59,7 @@
                 android:gravity="center_vertical|end"
                 android:text="@string/more_button"
                 android:textColor="@color/primaryDarkColor"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 

@@ -11,6 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.federicoberon.estilocafe.datasource.AppDatabase;
 import com.federicoberon.estilocafe.datasource.dao.OrdersDao;
+import com.federicoberon.estilocafe.datasource.dao.ProductsDao;
 import com.federicoberon.estilocafe.di.ApplicationContext;
 import com.federicoberon.estilocafe.di.DatabaseInfo;
 
@@ -75,5 +76,9 @@ public class DatabaseModule {
 
     @Singleton
     @Provides
-    OrdersDao provideQuestionsDao(AppDatabase db) { return INSTANCE.ordersDao(); }
+    OrdersDao provideOrdersDao(AppDatabase db) { return INSTANCE.ordersDao(); }
+
+    @Singleton
+    @Provides
+    ProductsDao provideProductDao(AppDatabase db) { return INSTANCE.productsDao(); }
 }

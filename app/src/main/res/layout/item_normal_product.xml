@@ -1,4 +1,122 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@color/white">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/food_card">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:id="@+id/iv_app_image"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                android:contentDescription="@string/food_image" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_app_name"
+                android:textSize="16sp"
+                android:padding="4dp"
+                android:textColor="@color/grey_text"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="6dp"
+                android:textStyle="bold"
+                android:layout_below="@+id/iv_app_image"
+                android:layout_alignParentStart="true" />
+
+            <com.federicoberon.estilocafe.ui.customview.RatingTextView
+                android:id="@+id/tv_app_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/iv_app_image"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                tools:ignore="RelativeOverlap" />
+
+            <TextView
+                android:id="@+id/textViewPricing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_app_name"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:padding="4dp"
+                android:text="@string/pesos_symbol"
+                android:textColor="@color/grey_text" />
+
+            <ImageView
+                android:id="@+id/ImageViewPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_app_name"
+                android:layout_alignEnd="@+id/tv_app_rating"
+                android:layout_marginTop="8dp"
+                android:background="?attr/actionBarItemBackground"
+                android:padding="6dp"
+                app:srcCompat="@drawable/ic_plus" />
+
+            <TextView
+                android:id="@+id/t_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ImageViewPlus"
+                android:layout_alignBottom="@+id/ImageViewPlus"
+                android:layout_toStartOf="@+id/ImageViewPlus"
+                android:hint="@string/_0"
+                android:textColor="@color/grey_text"
+                android:gravity="center"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/ImageViewMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/t_count"
+                android:layout_toStartOf="@+id/t_count"
+                android:background="?attr/actionBarItemBackground"
+                android:padding="6dp"
+                app:srcCompat="@drawable/ic_minus" />
+
+
+            <ImageView
+                android:id="@+id/imageViewOffer"
+                android:layout_width="@dimen/app_icon_size"
+                android:layout_height="@dimen/app_icon_size"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/description_subtitle"
+                tools:background="@drawable/_2x1" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
+
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardViewLayout"
     android:layout_width="110dp"
     android:layout_height="180dp"
@@ -29,14 +147,7 @@
             android:gravity="center_vertical"
             android:maxLines="2"
             android:text="@string/product_name"
-            android:textSize="12sp" />
-
-        <ImageView
-            android:id="@+id/iv_more_options"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_more_vert_black" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <RelativeLayout
@@ -51,12 +162,12 @@
             android:layout_marginEnd="1dp"
             android:gravity="center_vertical"
             android:text="@string/sample_rating"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/iv_app_rating"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_alignTop="@+id/tv_app_rating"
             android:layout_alignBottom="@+id/tv_app_rating"
             android:layout_toEndOf="@+id/tv_app_rating"
@@ -64,14 +175,16 @@
             android:src="@drawable/ic_star_black" />
 
         <TextView
-            android:id="@+id/tv_is_free"
+            android:id="@+id/textViewPricing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:text="@string/pricing"
             android:textColor="@color/primaryDarkColor"
-            android:textSize="10sp" />
+            android:textSize="12sp" />
     </RelativeLayout>
 
 </LinearLayout>
+
+-->
 

@@ -18,6 +18,9 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.home.ViewCartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.ProductDetailActivity"
             android:exported="false" />
         <activity

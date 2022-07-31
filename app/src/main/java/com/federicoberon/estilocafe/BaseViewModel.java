@@ -119,44 +119,6 @@ public class BaseViewModel extends ViewModel {
                     Log.e("ERROR", "Can´t load User from remote storage. Please contact support");
             }
         });
-    }
 
-    // TODO: 22/07/2022 hacer que recupere el menu
-
-    @SuppressLint("CheckResult")
-    public void retrieveTopScores() {
-        /*mTopScoresRepository.retrieveTopScoresFromRemote().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-
-                TopScoreEntity topScore;
-                List<TopScoreEntity> topScoreList = new ArrayList<>();
-
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    topScore = new TopScoreEntity();
-                    topScore.setScore((document.contains("score"))?((Number) document.get("score")).intValue():0);
-                    topScore.setCategory((document.contains("category"))?(String) document.get("category"):ANIME_CAT);
-                    topScore.setUser_id((document.contains("user_id"))?(String) document.get("user_id"):" ");
-                    topScore.setUser_name((document.contains("user_name"))?(String) document.get("user_name"):" ");
-                    topScore.setId_firebase(document.getId());
-                    topScoreList.add(topScore);
-                }
-
-                saveTSToLocalDB(topScoreList)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(topScores -> {
-                                    if(topScores != null && !topScores.isEmpty()){
-                                        if(sharedPref.getBoolean(ENABLE_LOGS, false))
-                                            log.log("TopScores saved");
-                                    }
-                                },
-                                throwable -> {
-                                    if(sharedPref.getBoolean(ENABLE_LOGS, false))
-                                        Log.e("MIO", "Unable to save topScores: ", throwable);
-                                });
-            } else {
-                Log.e(TAG, "Error getting documents: ", task.getException());
-            }
-        });*/
     }
 }

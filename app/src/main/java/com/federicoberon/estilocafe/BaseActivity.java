@@ -10,6 +10,7 @@ import android.text.Layout;
 import android.view.View;
 
 import com.federicoberon.estilocafe.ui.home.HomeActivity;
+import com.federicoberon.estilocafe.ui.login.LoginActivity;
 
 import javax.inject.Inject;
 

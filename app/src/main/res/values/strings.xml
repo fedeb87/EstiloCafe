@@ -283,11 +283,25 @@ All Rights Reserved"</string>
     <string name="pricing">$100</string>
     <string name="sample_rating">4.5</string>
     <string name="product_name">Product Name</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="add_to_chart_button">Agregar</string>
     <string name="transtionname_picture">transitionnamepicture</string>
     <string name="banner_string">20% off</string>
+    <string name="cat_promotions">Promociones</string>
+    <string name="cat_breakfast">Desayunos</string>
+    <string name="cat_sandwich">Sandwiches</string>
+    <string name="cat_salads">Ensaladas</string>
+    <string name="cat_menus">Menu</string>
 
+    <string name="pesos_symbol">$ </string>
+    <string name="view_cart">View Cart</string>
+    <string name="food_image">Food Image</string>
+    <string name="_0">0</string>
+    <string name="coupon">Coupon</string>
+    <string name="bill_details">Bill Details</string>
+    <string name="cart_total">Cart Total</string>
+    <string name="discount">Discount</string>
+    <string name="apply">Apply</string>
+    <string name="you_pay">You Pay</string>
 
 </resources>

@@ -6,9 +6,11 @@ import android.content.Context;
 import com.federicoberon.estilocafe.di.module.ApplicationModule;
 import com.federicoberon.estilocafe.di.module.DatabaseModule;
 import com.federicoberon.estilocafe.ui.about.AboutFragment;
+import com.federicoberon.estilocafe.ui.home.HomeActivity;
 import com.federicoberon.estilocafe.ui.home.HomeFragment;
 import com.federicoberon.estilocafe.ui.home.ProductDetailActivity;
 import com.federicoberon.estilocafe.ui.home.SearchResultFragment;
+import com.federicoberon.estilocafe.ui.home.ViewCartActivity;
 import com.federicoberon.estilocafe.ui.login.LoginActivity;
 import com.federicoberon.estilocafe.ui.login.LoginFragment;
 import com.federicoberon.estilocafe.ui.login.RegisterFragment;
@@ -48,4 +50,8 @@ public interface ApplicationComponent {
     void inject(SearchResultFragment searchResultFragment);
 
     void inject(ProductDetailActivity productDetailActivity);
+
+    void inject(HomeActivity homeActivity);
+
+    void inject(ViewCartActivity viewCartActivity);
 }

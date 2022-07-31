@@ -1,87 +1,78 @@
 package com.federicoberon.estilocafe.ui.home;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.federicoberon.estilocafe.R;
-import com.federicoberon.estilocafe.model.HomeItemModel;
-import com.federicoberon.estilocafe.model.ProductModel;
+import com.federicoberon.estilocafe.model.ProductEntity;
 
 import java.util.ArrayList;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
-public class HomeItemAdapter extends RecyclerView.Adapter {
+public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.NormalViewHolder> {
 
-    private final ArrayList<HomeItemModel> mArrayList;
+    private final ArrayList<String> mArrayList;
     private final Context mContext;
+    private final HomeFragment parentFragment;
 
-    public HomeItemAdapter(ArrayList<HomeItemModel> mArrayList, Context context) {
+    public HomeItemAdapter(ArrayList<String> mArrayList, Context context, HomeFragment fragment) {
         this.mArrayList = mArrayList;
         this.mContext = context;
+        this.parentFragment = fragment;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
+    public NormalViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
-
-        switch (viewType) {
-            case 1:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.offer_products, parent, false);
-                return new PopularViewHolder(view);
-
-            case 2:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.normal_products, parent, false);
-                return new NormalViewHolder(view);
-        }
-        return null;
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.normal_products, parent, false);
+        return new NormalViewHolder(view);
     }
 
+    @SuppressLint("CheckResult")
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NormalViewHolder holder, int position) {
 
-        HomeItemModel homeItemModel = mArrayList.get(position);
+        String headerString = mArrayList.get(position);
 
         // setting the horizontal recyclerviews
-        if (homeItemModel != null) {
-            switch (homeItemModel.getType()) {
-                case "special":
-                    ((PopularViewHolder) holder).popular_item_app_recycler_view.setHasFixedSize(true);
-                    RecyclerView.LayoutManager popLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
-                    ((PopularViewHolder) holder).popular_item_app_recycler_view.setLayoutManager(popLayoutManager);
+        if (headerString != null) {
 
-                    // recycler de arriba de to do
-                    ArrayList<ProductModel> popularList = loadPopularList();
-                    OfferProductAdapter popularItemAppAdapter = new OfferProductAdapter(popularList);
-                    ((PopularViewHolder) holder).popular_item_app_recycler_view.setAdapter(popularItemAppAdapter);
+            ((NormalViewHolder) holder).tv_card_header.setText(mArrayList.get(position));
 
-                    break;
-                case "normal":
-                    ((NormalViewHolder) holder).tv_card_header.setText(mArrayList.get(position).getHeader());
+            ((NormalViewHolder) holder).main_item_app_recycler_view.setHasFixedSize(true);
+            RecyclerView.LayoutManager normalLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
+            ((NormalViewHolder) holder).main_item_app_recycler_view.setLayoutManager(normalLayoutManager);
 
-                    if (!mArrayList.get(position).getSubHeader().equals(""))
-                        ((NormalViewHolder) holder).tv_card_sub_header.setText(mArrayList.get(position).getSubHeader());
-                    else
-                        ((NormalViewHolder) holder).tv_card_sub_header.setVisibility(View.GONE);
+            ((NormalViewHolder) holder).headerLayout.setOnClickListener(view ->
+                    ((HomeActivity)mContext).searchManagement(null, mArrayList.get(position)));
 
-                    ((NormalViewHolder) holder).main_item_app_recycler_view.setHasFixedSize(true);
-                    RecyclerView.LayoutManager normalLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
-                    ((NormalViewHolder) holder).main_item_app_recycler_view.setLayoutManager(normalLayoutManager);
 
-                    ArrayList<ProductModel> list = loadNormalList();
+            NormalProductAdapter normalProductAdapter = new NormalProductAdapter(new ArrayList<>(), mContext, parentFragment);
+            ((NormalViewHolder) holder).main_item_app_recycler_view.setAdapter(normalProductAdapter);
 
-                    NormalProductAdapter mainItemAppAdapter = new NormalProductAdapter(list);
-                    ((NormalViewHolder) holder).main_item_app_recycler_view.setAdapter(mainItemAppAdapter);
+            parentFragment.getProductByCategory(headerString)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(products -> {
+                                if(products==null || products.isEmpty())
+                                    return;
+                                normalProductAdapter.setData(new ArrayList<>(products));
+                            },
+                            throwable -> {
+                                //if(sharedPref.getBoolean(ENABLE_LOGS, false))
+                                    Log.e("MIO", "Unable to get alarms: ", throwable);
+                            });
 
-                    break;
-            }
         }
     }
 
@@ -90,65 +81,17 @@ public class HomeItemAdapter extends RecyclerView.Adapter {
         return mArrayList.size();
     }
 
-    // TODO: 22/07/2022 estos metodos los tiene que traer de un server remoto, sino quedarán hardcodeados 
-    private ArrayList<ProductModel> loadNormalList() {
-        ArrayList<ProductModel> mArrayList = new ArrayList<>();
-
-        if (mContext != null) {
-            // TODO: 22/07/2022 aca irian los productos normales
-            mArrayList.add(new ProductModel("id", "Udacity", "4.3", 100, R.drawable.coc, "Long desc"));
-        }
-
-        return mArrayList;
-    }
-
-    private ArrayList<ProductModel> loadPopularList() {
-        ArrayList<ProductModel> mArrayList = new ArrayList<>();
-
-        if (mContext != null) {
-            mArrayList.add(new ProductModel("id","Awesome Cricket Games", "4.5",100, R.drawable.card_image_1, "Enjoy seasonal clones and updates"));
-            mArrayList.add(new ProductModel("id","World Heath Day","4.3",150 , R.drawable.card_image_2, "Discover clones for a healthy life"));
-        }
-
-        return mArrayList;
-    }
-
     class NormalViewHolder extends RecyclerView.ViewHolder {
         private final TextView tv_card_header;
-        private final TextView tv_card_sub_header;
-        private final TextView btn_more;
         private final RecyclerView main_item_app_recycler_view;
+        private final LinearLayout headerLayout;
 
 
         NormalViewHolder(View view) {
             super(view);
-
+            headerLayout = view.findViewById(R.id.sectionHeader);
             tv_card_header = view.findViewById(R.id.header);
-            tv_card_sub_header = view.findViewById(R.id.sub_header);
-            btn_more = view.findViewById(R.id.more);
             main_item_app_recycler_view = view.findViewById(R.id.main_item_app_recycler_view);
-        }
-    }
-
-    class PopularViewHolder extends RecyclerView.ViewHolder {
-        private final RecyclerView popular_item_app_recycler_view;
-
-        PopularViewHolder(View view) {
-            super(view);
-            popular_item_app_recycler_view = view.findViewById(R.id.popular_item_app_recycler_view);
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-
-        switch (mArrayList.get(position).getType()) {
-            case "special":
-                return 1;
-            case "normal":
-                return 2;
-            default:
-                return -1;
         }
     }
 }

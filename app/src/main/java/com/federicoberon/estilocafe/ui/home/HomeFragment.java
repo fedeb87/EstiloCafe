@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,17 +17,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.federicoberon.estilocafe.EstiloCafeApplication;
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.databinding.FragmentHomeBinding;
-import com.federicoberon.estilocafe.model.HomeItemModel;
+import com.federicoberon.estilocafe.model.ProductEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
-import dmax.dialog.SpotsDialog;
 
-public class HomeFragment extends Fragment {
+import dmax.dialog.SpotsDialog;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
+
+public class HomeFragment extends Fragment implements CartEventListener{
     private static final String LOG_TAG = "<<< HomeFragment >>>";
     private AlertDialog mDialog;
     private FragmentHomeBinding binding;
+    private HomeItemAdapter homeItemAdapter;
+    private final CompositeDisposable mDisposable = new CompositeDisposable();
 
     @Inject
     HomeViewModel mViewModel;
@@ -70,35 +77,59 @@ public class HomeFragment extends Fragment {
         return binding.getRoot();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        //todo listener for view clicks
-    }
-
     private void configureMainRecyclerView() {
         binding.forYouRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.forYouRecyclerView.setLayoutManager(layoutManager);
+        //loadMainItemsData();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mDisposable.dispose();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         loadMainItemsData();
     }
 
     private void loadMainItemsData() {
 
-        ArrayList<HomeItemModel> mArrayList = new ArrayList<>();
+        mDisposable.add(mViewModel.getAllCategories()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(products -> {
+                if(products.contains(getString(R.string.cat_promotions))) {
+                    products.remove(getString(R.string.cat_promotions));
+                    products.add(0, getString(R.string.cat_promotions));
+                }
 
-        // TODO: 22/07/2022 estos header deberia sacarlos de firebase, para que sean dinamicos si crean una nueva categoria
-        
-        if (getActivity() != null) {
-            // estos son los 4 principales, tienen que ser como el normal
-            mArrayList.add(new HomeItemModel("Promociones", "", "special"));
-            mArrayList.add(new HomeItemModel("Recomendados", "", "normal"));
-            mArrayList.add(new HomeItemModel("Sandwiches", "", "normal"));
-            mArrayList.add(new HomeItemModel("Menu", "", "normal"));
-        }
+                homeItemAdapter = new HomeItemAdapter(new ArrayList<>(products), requireActivity(), this);
+                binding.forYouRecyclerView.setAdapter(homeItemAdapter);
+            }));
+    }
 
-        HomeItemAdapter homeItemAdapter = new HomeItemAdapter(mArrayList, requireActivity());
-        binding.forYouRecyclerView.setAdapter(homeItemAdapter);
+    public Flowable<List<ProductEntity>> getProductByCategory(String cat) {
+        return mViewModel.getProductsLocallyByCat(cat);
+    }
 
+    @Override
+    public void addToCart(Long id, float price){
+        mViewModel.addToCart(id, price);
+        ((HomeActivity)requireActivity()).updateCartBanner();
+    }
+
+    @Override
+    public void removeFromCart(Long id, float price){
+        mViewModel.removeFromCart(id, price);
+        ((HomeActivity)requireActivity()).updateCartBanner();
+    }
+
+    @Override
+    public int getProductCount(Long id) {
+        return mViewModel.getProductCount(id);
     }
 }

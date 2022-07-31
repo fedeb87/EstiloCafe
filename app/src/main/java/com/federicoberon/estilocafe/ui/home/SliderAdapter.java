@@ -1,6 +1,7 @@
 package com.federicoberon.estilocafe.ui.home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +36,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
         String sliderItem = mImagesPath.get(position);
         if (sliderItem != null) {
             if (!sliderItem.isEmpty()) {
-                // todo ver como lo voy a dejar, de donde voya a sacar las fotos
-                Picasso.with(context).load(Integer.valueOf(sliderItem)).into(viewHolder.imageViewSlider);
+                Picasso.with(context).load(sliderItem).into(viewHolder.imageViewSlider);
             }
         }
     }

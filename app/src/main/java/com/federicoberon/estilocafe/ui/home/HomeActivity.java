@@ -1,11 +1,16 @@
 package com.federicoberon.estilocafe.ui.home;
 
+import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
 import static com.federicoberon.estilocafe.utils.Constants.SEARCH_QUERY_KEY;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -16,13 +21,26 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.federicoberon.estilocafe.EstiloCafeApplication;
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.databinding.ActivityHomeBinding;
+import com.federicoberon.estilocafe.model.ProductEntity;
+import com.federicoberon.estilocafe.model.ProductModel;
 import com.federicoberon.estilocafe.utils.NetworkChangeReceiver;
 import com.federicoberon.estilocafe.utils.NetworkStateManager;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -32,6 +50,10 @@ public class HomeActivity extends AppCompatActivity {
     private NavController navController;
     private NetworkChangeReceiver networkChangeReceiver;
     private Snackbar snackbar;
+    private final CompositeDisposable mDisposable = new CompositeDisposable();
+
+    @Inject
+    HomeViewModel mViewModel;
 
     /**
      * Observer for internet connectivity status live-data
@@ -51,6 +73,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ((EstiloCafeApplication) getApplicationContext())
+                .appComponent.inject(this);
+
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -64,7 +89,6 @@ public class HomeActivity extends AppCompatActivity {
                 .build();
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment_home);
-        //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         binding.navView.getMenu().getItem(0).setChecked(true);
@@ -72,21 +96,73 @@ public class HomeActivity extends AppCompatActivity {
 
         // listener for searchview
         binding.appBarMain.searchView.setOnQueryChangeListener((oldQuery, newQuery) -> {
+
             Fragment currentFragment = getForegroundFragment();
-            if(Objects.equals(currentFragment.getClass(), SearchResultFragment.class)){
-                ((SearchResultFragment)currentFragment).reloadResults("mi query");
-            }else{
-                Bundle args = new Bundle();
-                args.putString(SEARCH_QUERY_KEY, "mi query");
-                navController.navigate(R.id.show_searchResultFragment, args);
-            }
+            if(Objects.equals(currentFragment.getClass(), SearchResultFragment.class))
+                searchManagement(newQuery, mViewModel.getSelectedCategory());
+            else
+                searchManagement(newQuery, null);
+
         });
+
 
         binding.appBarMain.searchView.setOnClearSearchActionListener(() -> {
             binding.appBarMain.searchView.clearSearchFocus();
             if(Objects.equals(getForegroundFragment().getClass(), SearchResultFragment.class))
                 navController.popBackStack();
         });
+
+        ArrayList<ProductEntity> productsList = new ArrayList<>();
+        mViewModel.getAll().get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
+                for (DocumentSnapshot d : queryDocumentSnapshots.getDocuments()) {
+                    if (d.exists()) {
+                        ProductModel productModel = d.toObject(ProductModel.class);
+                        assert productModel != null;
+                        productModel.setProductID(d.getId());
+                        productsList.add(convertToRoomProduct(productModel));
+                    }
+                }
+                mDisposable.add(mViewModel.insertAllProducts(productsList)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(products -> {
+                            Log.w("MIO", "<<<HomeActivity>>> - cantidad de productos insertados " + products.size());
+                        }));
+            }
+        });
+
+        if(mViewModel.getCartCount()>0)
+            binding.appBarMain.bCart.setVisibility(View.VISIBLE);
+
+        binding.appBarMain.bCart.setOnClickListener(view ->
+                startActivity(new Intent(HomeActivity.this, ViewCartActivity.class)));
+    }
+
+    private ProductEntity convertToRoomProduct(ProductModel productModel) {
+        ProductEntity pe = new ProductEntity();
+        pe.setCategory(productModel.getCategory());
+        pe.setDescription(productModel.getDescription());
+        pe.setImages(productModel.getImagesAsString());
+        pe.setName(productModel.getName());
+        pe.setOffer(productModel.getOffer());
+        pe.setRating(productModel.getRating());
+        pe.setPrice(productModel.getPrice());
+        pe.setIdFirebase(productModel.getProductID());
+        return pe;
+    }
+
+    public void searchManagement(String query, String category) {
+        Fragment currentFragment = getForegroundFragment();
+        if(Objects.equals(currentFragment.getClass(), SearchResultFragment.class)){
+            ((SearchResultFragment)currentFragment).reloadResults(query, category);
+        }else{
+            Bundle args = new Bundle();
+            args.putString(SEARCH_QUERY_KEY, query);
+            args.putString(PRODUCT_CAT, category);
+            navController.navigate(R.id.show_searchResultFragment, args);
+        }
     }
 
     @Override
@@ -146,5 +222,15 @@ public class HomeActivity extends AppCompatActivity {
 
     public NavController getNavController() {
         return navController;
+    }
+
+    public void updateCartBanner() {
+        if(mViewModel.getCartCount()<1)
+            binding.appBarMain.cartView.setVisibility(View.GONE);
+        else
+            binding.appBarMain.cartView.setVisibility(View.VISIBLE);
+
+        binding.appBarMain.tTotalPrice.setText(String.valueOf(mViewModel.getTotal()));
+        binding.appBarMain.tCartCount.setText(String.valueOf(mViewModel.getCartCount()));
     }
 }

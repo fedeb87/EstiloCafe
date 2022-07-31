@@ -1,7 +1,8 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -15,6 +16,12 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="@color/primaryColor"
             >
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -40,33 +47,28 @@
                     app:sliderScrollTimeInSec="1"
                     app:sliderStartAutoCycle="true" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="45dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_gravity="bottom"
-                    >
+                    <ImageView
+                        android:id="@+id/imageViewOffer"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_width="@dimen/header_main_content"
+                        android:layout_height="@dimen/header_main_content"
+                        tools:background="@drawable/_2x1"
+                        android:visibility="gone"
+                        android:contentDescription="@string/description_subtitle"
+                        />
 
-                    <TextView
-                        android:id="@+id/textViewOfferBanner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/banner_string"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="@color/white" />
-
-                </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageGoBack"
+                    android:layout_width="@dimen/search_bar_height"
+                    android:layout_height="@dimen/search_bar_height"
+                    app:tint="@color/white"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:contentDescription="@string/food_image"
+                    />
 
             </FrameLayout>
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -79,9 +81,81 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <include
+            android:id="@+id/detailContent"
             layout="@layout/product_detail_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/cart_view"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:visibility="gone"
+        android:background="@color/ratingHigh">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/i_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:srcCompat="@drawable/ic_cart" />
+
+            <TextView
+                android:id="@+id/t_cart_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/i_cart"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="0"
+                android:textColor="@color/white" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/i_cart"
+                android:layout_alignBottom="@+id/i_cart"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_toEndOf="@+id/t_cart_count"
+                android:background="@color/white" />
+
+            <TextView
+                android:id="@+id/t_total_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/b_cart"
+                android:layout_toEndOf="@+id/divider"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/pesos_symbol"
+                android:textColor="@color/white"
+                tools:text="$" />
+
+            <Button
+                android:id="@+id/b_cart"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/view_cart"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.Toolbar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
