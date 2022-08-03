@@ -5,6 +5,12 @@ plugins {
 android {
     compileSdk 32
 
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+        exclude 'META-INF/NOTICE.md'
+        exclude 'META-INF/LICENSE.md'
+    }
+
     defaultConfig {
         applicationId "com.federicoberon.estilocafe"
         minSdk 21
@@ -97,5 +103,10 @@ dependencies {
 
     // imageslider
     implementation 'com.github.smarteist:autoimageslider:1.3.7'
+
+    // for send email
+
+    implementation 'com.sun.mail:android-mail:1.6.6'
+    implementation 'com.sun.mail:android-activation:1.6.6'
 }
 apply plugin: 'com.google.gms.google-services'

@@ -42,16 +42,12 @@ public class ProfileImageRepository {
     }
 
     public void getProfileImageToExternalStorage(String uid){
-        //todo que haga un throw si falla
         StorageReference islandRef = mStorage.child(uid+"_profile.jpg");
 
         File localFile = new File(StorageUtil.getProfileImagePath(uid));
         if (!localFile.exists()) new File(StorageUtil.getProfileAbsolutePath()).mkdirs();
 
-        islandRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {})
-            .addOnFailureListener(exception -> {
-                Log.e(LOG_TAG, "Error download profile image:: " + exception.getMessage());
-        });
+        islandRef.getFile(localFile).addOnSuccessListener(taskSnapshot -> {});
     }
 
     public FileDownloadTask getProfileImageToExternalStorageLive(String uid){

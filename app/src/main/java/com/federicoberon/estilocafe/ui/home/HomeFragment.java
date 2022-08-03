@@ -87,7 +87,7 @@ public class HomeFragment extends Fragment implements CartEventListener{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mDisposable.dispose();
+        mDisposable.clear();
     }
 
     @Override

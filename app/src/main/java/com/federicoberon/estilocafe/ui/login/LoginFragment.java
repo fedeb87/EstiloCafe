@@ -1,5 +1,7 @@
 package com.federicoberon.estilocafe.ui.login;
 
+import static com.federicoberon.estilocafe.utils.Constants.NICKNAME_KEY;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -162,9 +164,9 @@ public class LoginFragment extends Fragment {
         mViewModel.getUser(id).addOnSuccessListener(documentSnapshot -> {
             mDialog.dismiss();
             if (documentSnapshot.exists()) {
-                if (documentSnapshot.contains("nickname")) {
-                    if (documentSnapshot.get("nickname") != null
-                            && !Objects.requireNonNull(documentSnapshot.get("nickname")).equals("")) {
+                if (documentSnapshot.contains(NICKNAME_KEY)) {
+                    if (documentSnapshot.get(NICKNAME_KEY) != null
+                            && !Objects.requireNonNull(documentSnapshot.get(NICKNAME_KEY)).equals("")) {
                         mViewModel.saveUserInfo(requireContext(), mViewModel.getUid());
 
                         ((LoginActivity)requireActivity()).goHome();

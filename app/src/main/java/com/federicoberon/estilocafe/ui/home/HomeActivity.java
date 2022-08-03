@@ -1,10 +1,12 @@
 package com.federicoberon.estilocafe.ui.home;
 
+import static com.federicoberon.estilocafe.utils.Constants.NICKNAME_KEY;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
 import static com.federicoberon.estilocafe.utils.Constants.SEARCH_QUERY_KEY;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -51,6 +53,10 @@ public class HomeActivity extends AppCompatActivity {
     private NetworkChangeReceiver networkChangeReceiver;
     private Snackbar snackbar;
     private final CompositeDisposable mDisposable = new CompositeDisposable();
+
+
+    @Inject
+    public SharedPreferences sharedPref;
 
     @Inject
     HomeViewModel mViewModel;
@@ -105,6 +111,13 @@ public class HomeActivity extends AppCompatActivity {
 
         });
 
+        // set username in shared preferences
+        mViewModel.getUser().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists())
+                if (documentSnapshot.contains("nickname"))
+                    if (documentSnapshot.get("nickname") != null)
+                        sharedPref.edit().putString(NICKNAME_KEY, documentSnapshot.getString("nickname")).apply();
+        });
 
         binding.appBarMain.searchView.setOnClearSearchActionListener(() -> {
             binding.appBarMain.searchView.clearSearchFocus();
@@ -136,6 +149,7 @@ public class HomeActivity extends AppCompatActivity {
         if(mViewModel.getCartCount()>0)
             binding.appBarMain.bCart.setVisibility(View.VISIBLE);
 
+        // view cart event
         binding.appBarMain.bCart.setOnClickListener(view ->
                 startActivity(new Intent(HomeActivity.this, ViewCartActivity.class)));
     }
@@ -169,6 +183,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         checkInternetConnectivity();
+        updateCartBanner();
     }
 
     @Override
@@ -176,6 +191,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onDestroy();
         if (networkChangeReceiver!=null)
             unregisterReceiver(networkChangeReceiver);
+        mDisposable.clear();
     }
 
     private void showNotificationSnackBar(){

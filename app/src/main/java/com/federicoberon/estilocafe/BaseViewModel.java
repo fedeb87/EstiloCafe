@@ -69,11 +69,16 @@ public class BaseViewModel extends ViewModel {
     }
 
     public void logout() {
+        sharedPref.edit().remove(NICKNAME_KEY).apply();
         mAuthRepository.logout();
     }
 
     public Task<DocumentSnapshot> getUser(String id) {
         return mAuthRepository.getUser(id);
+    }
+
+    public Task<DocumentSnapshot> getUser() {
+        return mAuthRepository.getUser(getUid());
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")

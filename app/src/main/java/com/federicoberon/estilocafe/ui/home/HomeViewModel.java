@@ -1,6 +1,8 @@
 package com.federicoberon.estilocafe.ui.home;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.federicoberon.estilocafe.BaseViewModel;
 import com.federicoberon.estilocafe.EstiloCafeApplication;
 import com.federicoberon.estilocafe.model.ProductEntity;
@@ -78,12 +80,14 @@ public class HomeViewModel extends BaseViewModel {
     }
 
     public void removeFromCart(Long id, float price){
-        if(carrito.containsKey(id))
+        if(carrito.containsKey(id)){
             if (carrito.get(id)>1)
                 carrito.put(id,carrito.get(id)-1);
             else
                 carrito.remove(id);
-        total = total>0?total-price:0;
+            total = total>=price?total-price:0;
+            Log.w("MIO", "TOTALLLLL::::: " + total);
+        }
     }
 
     public void setAbsolutePhotoPath(String mAbsolutePhotoPath) {
@@ -254,5 +258,10 @@ public class HomeViewModel extends BaseViewModel {
 
     public Flowable<List<String>> getAllCategories() {
         return mProductsRepository.getAllCategories();
+    }
+
+    public void emptyCart() {
+        carrito = new HashMap<>();
+        total = 0;
     }
 }

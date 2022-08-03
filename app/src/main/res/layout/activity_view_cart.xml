@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
+    android:layout_marginHorizontal="16dp"
     android:layout_width="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,23 +13,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/grey"/>
+
         <RelativeLayout
             android:id="@+id/billLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:layout_below="@+id/productsList"
+            android:background="@color/white"
             android:padding="8dp">
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/couponLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
                 android:layout_toStartOf="@+id/buttonApply"
-                app:hintEnabled="true"
                 android:textColorHint="@color/grey_text"
-                android:layout_marginTop="8dp">
+                app:hintEnabled="true">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/TextViewCoupon"
                     android:layout_width="match_parent"
@@ -39,7 +43,7 @@
                     android:maxLines="1"
                     android:singleLine="true"
                     android:textColor="@color/grey_text"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -51,6 +55,7 @@
                 android:layout_alignParentEnd="true"
                 android:text="@string/apply"
                 android:textColor="@color/primaryColor" />
+
             <ImageView
                 android:id="@+id/imageViewRemove"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
@@ -58,21 +63,22 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/couponLayout"
                 android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/ic_minus"
-                android:visibility="invisible"
                 android:contentDescription="@string/desc"
-                android:textColor="@color/primaryColor" />
+                android:textColor="@color/primaryColor"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_minus" />
+
             <TextView
                 android:id="@+id/textViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/couponLayout"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/bill_details"
-                android:textStyle="bold"
                 android:textColor="@color/grey_text"
                 android:textSize="14sp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextViewTotal"
@@ -84,61 +90,96 @@
                 android:text="@string/cart_total"
                 android:textColor="@color/grey_text"
                 android:textSize="14sp" />
+
             <TextView
                 android:id="@+id/textViewTotalValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewTitle"
-                android:gravity="center_vertical|end"
-                android:layout_alignParentEnd="true"
                 android:layout_alignTop="@+id/TextViewTotal"
-                android:layout_alignBottom="@+id/TextViewTotal"/>
+                android:layout_alignBottom="@+id/TextViewTotal"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical|end" />
+
             <TextView
                 android:id="@+id/textViewDiscount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/discount"
-                android:padding="4dp"
+                android:layout_below="@+id/TextViewTotal"
                 android:layout_marginStart="4dp"
-                android:textColor="@color/grey_text"
-                android:layout_below="@+id/TextViewTotal"/>
+                android:padding="4dp"
+                android:text="@string/discount"
+                android:textColor="@color/grey_text" />
+
             <TextView
                 android:id="@+id/textViewDiscountValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/TextViewTotal"
-                android:layout_alignParentEnd="true"
-                android:gravity="center_vertical|end"
                 android:layout_alignTop="@+id/textViewDiscount"
-                android:layout_alignBottom="@+id/textViewDiscount"/>
+                android:layout_alignBottom="@+id/textViewDiscount"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical|end" />
+
             <View
                 android:id="@+id/line"
                 android:layout_width="150dp"
                 android:layout_height="1dp"
-                android:background="@color/grey"
                 android:layout_below="@+id/textViewDiscountValue"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"/>
+                android:layout_marginBottom="6dp"
+                android:background="@color/grey" />
+
             <TextView
                 android:id="@+id/textViewTotalFinal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical|end"
-                android:layout_alignParentEnd="true"
                 android:layout_below="@+id/line"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="8dp"
+                android:gravity="center_vertical|end"
                 android:padding="4dp" />
+
             <TextView
+                android:id="@+id/youPay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/you_pay"
-                android:textStyle="bold"
                 android:layout_below="@id/line"
-                android:padding="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:layout_toStartOf="@id/line"/>
+                android:layout_toStartOf="@id/line"
+                android:padding="4dp"
+                android:text="@string/you_pay"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/youPay"
+                android:gravity="fill_horizontal"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/emptyButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/empty_button" />
+
+                <Button
+                    android:id="@+id/sendButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/send_button" />
+            </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
 </ScrollView>

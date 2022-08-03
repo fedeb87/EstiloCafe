@@ -24,4 +24,5 @@ public class Constants {
     public static String PRODUCT_OFFER = "offer";
 
     public static String SEARCH_QUERY_KEY = "query";
+    public static String PHONE_NO = "+541122537592";
 }

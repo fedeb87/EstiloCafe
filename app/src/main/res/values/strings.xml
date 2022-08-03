@@ -303,5 +303,9 @@ All Rights Reserved"</string>
     <string name="discount">Discount</string>
     <string name="apply">Apply</string>
     <string name="you_pay">You Pay</string>
+    <string name="send_button">send</string>
+    <string name="error_send_request">Necesita otorgar los permisos suficientes para que el pedido pueda ser enviado</string>
+    <string name="new_request">Nuevo pedido - %s</string>
+    <string name="empty_button">Empty cart</string>
 
 </resources>
