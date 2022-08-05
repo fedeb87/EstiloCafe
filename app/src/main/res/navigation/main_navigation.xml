@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/nav_home">
 
     <dialog
         android:id="@+id/termsDialogFragment"
         android:name="com.federicoberon.estilocafe.ui.about.TermsDialogFragment"
         android:label="TermsDialogFragment" />
     <fragment
-        android:id="@+id/aboutFragment"
+        android:id="@+id/nav_about"
         android:name="com.federicoberon.estilocafe.ui.about.AboutFragment"
         android:label="fragment_about"
         tools:layout="@layout/fragment_about" >
@@ -19,7 +19,7 @@
             app:destination="@id/termsDialogFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="com.federicoberon.estilocafe.ui.home.HomeFragment"
         android:label="HomeFragment" >
         <action
@@ -28,6 +28,10 @@
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.federicoberon.estilocafe.ui.home.SearchResultFragment"
+        android:name="com.federicoberon.estilocafe.ui.home.search.SearchResultFragment"
         android:label="SearchResultFragment" />
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="com.federicoberon.estilocafe.ui.home.history.HistoryFragment"
+        android:label="HistoryFragment" />
 </navigation>

@@ -52,5 +52,8 @@ public interface ProductsDao extends BaseDao<OrderEntity>{
 
     @Query("SELECT DISTINCT category FROM products")
     Flowable<List<String>> getAllCategories();
+
+    @Query("SELECT DISTINCT idFirebase FROM products")
+    Flowable<List<String>> getAllProductsIds();
     /* 0 (false) and 1 (true). */
 }

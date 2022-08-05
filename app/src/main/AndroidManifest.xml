@@ -21,10 +21,10 @@
             android:name=".ui.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.home.ViewCartActivity"
+            android:name=".ui.home.cart.ViewCartActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.home.ProductDetailActivity"
+            android:name=".ui.home.detail.ProductDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.home.HomeActivity"

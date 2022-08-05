@@ -1,4 +1,4 @@
-package com.federicoberon.estilocafe.ui.home;
+package com.federicoberon.estilocafe.ui.home.detail;
 
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_DESC;
@@ -21,8 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.federicoberon.estilocafe.EstiloCafeApplication;
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.databinding.ActivityProductDetailBinding;
-import com.federicoberon.estilocafe.ui.login.LoginActivity;
-import com.federicoberon.estilocafe.ui.splash.SplashActivity;
+import com.federicoberon.estilocafe.ui.home.CartEventListener;
+import com.federicoberon.estilocafe.ui.home.HomeViewModel;
+import com.federicoberon.estilocafe.ui.home.cart.ViewCartActivity;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;

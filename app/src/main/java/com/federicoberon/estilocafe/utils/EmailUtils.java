@@ -2,6 +2,12 @@ package com.federicoberon.estilocafe.utils;
 
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.federicoberon.estilocafe.model.ProductEntity;
+
+import java.util.HashMap;
+import java.util.List;
+
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 
@@ -44,5 +50,26 @@ public class EmailUtils {
                 return false;
             }
         }
+    }
+
+    public static String productsToBody(List<ProductEntity> products, HashMap<Long, Integer> cart, float total){
+
+        String text=
+                "<html><font size='5' face='Courier New' >" +
+                        "<table border='1' align='center'>"
+                        + "<tr align='center'>"
+                        + "<td><b>Product Name <b></td>"
+                        + "<td><b>Unit price<b></td>"
+                        + "<td><b>Count<b></td>"
+                        + "</tr>";
+
+        for(ProductEntity product : products) {
+            text = text + "<tr align='center'>" + "<td>" + product.getName() + "</td>"
+                    + "<td>" + product.getPrice() + "</td>" + "<td>" + cart.get(product.getId()) + "</td>" + "</tr>";
+        }
+
+        text += "\n TOTAL: " + total;
+        text += "</font></html>";
+        return text;
     }
 }

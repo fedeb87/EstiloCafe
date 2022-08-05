@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import com.federicoberon.estilocafe.EstiloCafeApplication;
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.databinding.FragmentAboutBinding;
+import com.federicoberon.estilocafe.ui.home.HomeActivity;
 import com.vansuita.materialabout.builder.AboutBuilder;
 import com.vansuita.materialabout.views.AboutView;
 
@@ -38,28 +39,24 @@ public class AboutFragment extends Fragment {
         requireContext().getTheme().applyStyle(R.style.AppThemeDark, true);
         loadAbout();
 
+        ((HomeActivity)requireActivity()).getBinding().appBarMain.searchView.setVisibility(View.GONE);
         return root;
     }
 
     private void loadAbout() {
-
-        String url = "https://www.paypal.com/donate/?hosted_button_id=XAKHYHY3HUFQG";
-        Intent donateIntent = new Intent(Intent.ACTION_VIEW);
-        donateIntent.setData(Uri.parse(url));
-
         AboutBuilder builder = AboutBuilder.with(requireActivity())
                 .setAppIcon(R.mipmap.ic_launcher)
                 .setAppName(R.string.app_name)
                 .setLinksAnimated(true)
                 .setDividerDashGap(12)
-                .setName("Federico Beron")
-                .setSubTitle("Mobile Developer")
-                .setBrief(R.string.brew_personal_desc)
+                .setName("Estilo Cafe")
+                .setSubTitle("Bar y Cafetería")
+                .setBrief(R.string.brew_commerce_desc)
                 .addFiveStarsAction()
                 .setVersionNameAsAppSubTitle()
                 .addShareAction(R.string.app_name)
                 .setActionsColumnsCount(2)
-                .addFeedbackAction("soporte.alarme@gmail.com")
+                .addFeedbackAction("estilocafe.pilar@gmail.com")
                 .addPrivacyPolicyAction(v -> {
 
                     Bundle args = new Bundle();
@@ -67,7 +64,6 @@ public class AboutFragment extends Fragment {
                     Navigation.findNavController(
                             binding.getRoot()).navigate(R.id.action_aboutFragment_to_termsDialogFragment, args);
                 })
-                .addDonateAction(donateIntent)
                 .setWrapScrollView(true)
                 .setShowAsCard(true);
 
@@ -79,6 +75,7 @@ public class AboutFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
 
+        ((HomeActivity)requireActivity()).getBinding().appBarMain.searchView.setVisibility(View.VISIBLE);
         requireContext().getTheme().applyStyle(R.style.Theme_EstiloCafe, true);
 
         binding = null;

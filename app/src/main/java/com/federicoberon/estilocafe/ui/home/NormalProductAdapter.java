@@ -1,6 +1,5 @@
 package com.federicoberon.estilocafe.ui.home;
 
-import static androidx.core.content.ContextCompat.getDrawable;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_DESC;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_IMAGES;
@@ -14,7 +13,6 @@ import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_RATING;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.model.ProductEntity;
 import com.federicoberon.estilocafe.ui.customview.RatingTextView;
+import com.federicoberon.estilocafe.ui.home.detail.ProductDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.federicoberon.estilocafe.ui.home;
+package com.federicoberon.estilocafe.ui.home.cart;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -33,6 +33,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Recycl
 
     public interface EventListener{
         void removeProduct(Long id, float price);
+        boolean isRepeatedOrder();
     }
 
     public class RecyclerViewHolders extends RecyclerView.ViewHolder {
@@ -69,23 +70,27 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Recycl
         holder.tQuantity.setText(String.valueOf(cant));
         holder.tTotalPrice.setText(String.format("$ %s", cant * productEntity.getPrice()));
 
-        if(cart.get(productEntity.getId())>1)
-            holder.iDelete.setBackground(mContext.getDrawable(R.drawable.ic_remove));
-        else
-            holder.iDelete.setBackground(mContext.getDrawable(R.drawable.ic_cancel));
+        if(!listener.isRepeatedOrder()) {
+            if (cart.get(productEntity.getId()) > 1)
+                holder.iDelete.setBackground(mContext.getDrawable(R.drawable.ic_remove));
+            else
+                holder.iDelete.setBackground(mContext.getDrawable(R.drawable.ic_cancel));
 
-        holder.iDelete.setOnClickListener(view -> {
-            Long productId = productEntity.getId();
-            if (cart.get(productId) > 1){
-                listener.removeProduct(productId, productEntity.getPrice());
-                //cart.put(productId, cart.get(productId) - 1);
-            }else{
-                //cart.remove(productId);
-                products.remove(holder.getAdapterPosition());
-                listener.removeProduct(productId, productEntity.getPrice());
-            }
-            notifyDataSetChanged();
-        });
+            holder.iDelete.setOnClickListener(view -> {
+                Long productId = productEntity.getId();
+                if (cart.get(productId) > 1) {
+                    listener.removeProduct(productId, productEntity.getPrice());
+                    //cart.put(productId, cart.get(productId) - 1);
+                } else {
+                    //cart.remove(productId);
+                    products.remove(holder.getAdapterPosition());
+                    listener.removeProduct(productId, productEntity.getPrice());
+                }
+                notifyDataSetChanged();
+            });
+        }else{
+            holder.iDelete.setVisibility(View.GONE);
+        }
     }
 
 

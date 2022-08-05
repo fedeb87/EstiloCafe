@@ -5,7 +5,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Date;
 
 /**
  * Immutable model class for a order
@@ -13,28 +13,41 @@ import java.util.Objects;
 @Entity(tableName = "orders")
 public class OrderEntity implements Serializable {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
-    private String response;
-    private int difficulty;
-    private int category;
-
-    public OrderEntity(long id, String response, int category, int difficulty) {
-        this.id = id;
-        this.response = response;
-        this.difficulty = difficulty;
-        this.category = category;
-    }
-
-    @Ignore
-    public OrderEntity(String response, int category, int difficulty) {
-        this.response = response;
-        this.difficulty = difficulty;
-        this.category = category;
-    }
+    private String productsList;
+    private String productsCant;
+    private Date date;
+    private float total;
+    private String title;
 
     @Ignore
     public OrderEntity() {
+    }
+
+    public OrderEntity(long id, String productsList, String productsCant, Date date, float total, String title) {
+        this.id = id;
+        this.productsList = productsList;
+        this.productsCant = productsCant;
+        this.date = date;
+        this.total = total;
+        this.title = title;
+    }
+
+    public String getProductsCant() {
+        return productsCant;
+    }
+
+    public void setProductsCant(String productsCant) {
+        this.productsCant = productsCant;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public long getId() {
@@ -45,41 +58,27 @@ public class OrderEntity implements Serializable {
         this.id = id;
     }
 
-    public String getResponse() {
-        return response;
+    public String getProductsList() {
+        return productsList;
     }
 
-    public void setResponse(String response) {
-        this.response = response;
+    public void setProductsList(String productsList) {
+        this.productsList = productsList;
     }
 
-    public int getDifficulty() {
-        return difficulty;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public int getCategory() {
-        return category;
+    public float getTotal() {
+        return total;
     }
 
-    public void setCategory(int category) {
-        this.category = category;
+    public void setTotal(float total) {
+        this.total = total;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderEntity alarmEntity = (OrderEntity) o;
-        return response.equals(alarmEntity.response) && id == id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(response);
-    }
-
 }

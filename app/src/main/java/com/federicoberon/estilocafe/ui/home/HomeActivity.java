@@ -28,6 +28,9 @@ import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.databinding.ActivityHomeBinding;
 import com.federicoberon.estilocafe.model.ProductEntity;
 import com.federicoberon.estilocafe.model.ProductModel;
+import com.federicoberon.estilocafe.ui.home.cart.ViewCartActivity;
+import com.federicoberon.estilocafe.ui.home.search.SearchResultFragment;
+import com.federicoberon.estilocafe.ui.login.LoginActivity;
 import com.federicoberon.estilocafe.utils.NetworkChangeReceiver;
 import com.federicoberon.estilocafe.utils.NetworkStateManager;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,7 +56,6 @@ public class HomeActivity extends AppCompatActivity {
     private NetworkChangeReceiver networkChangeReceiver;
     private Snackbar snackbar;
     private final CompositeDisposable mDisposable = new CompositeDisposable();
-
 
     @Inject
     public SharedPreferences sharedPref;
@@ -90,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
 
         drawer = binding.drawerLayout;
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_about)
+                R.id.nav_home, R.id.nav_history, R.id.nav_about)
                 .setOpenableLayout(drawer)
                 .build();
 
@@ -138,11 +140,12 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }
                 mDisposable.add(mViewModel.insertAllProducts(productsList)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(products -> {
-                            Log.w("MIO", "<<<HomeActivity>>> - cantidad de productos insertados " + products.size());
-                        }));
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(products -> {
+                        Log.w("MIO", "<<<HomeActivity>>> - cantidad de productos insertados " + products.size());
+                    })
+                );
             }
         });
 
@@ -152,6 +155,24 @@ public class HomeActivity extends AppCompatActivity {
         // view cart event
         binding.appBarMain.bCart.setOnClickListener(view ->
                 startActivity(new Intent(HomeActivity.this, ViewCartActivity.class)));
+
+        binding.navView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId()==R.id.logout_menu) {
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
+
+                mViewModel.logout();
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                return true;
+            }
+
+            NavigationUI.onNavDestinationSelected(item, navController);
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
+
+        binding.navView.getMenu().getItem(0).setChecked(true);
     }
 
     private ProductEntity convertToRoomProduct(ProductModel productModel) {

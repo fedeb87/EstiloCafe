@@ -23,6 +23,10 @@ public class Constants {
     public static String PRODUCT_IMAGES = "images";
     public static String PRODUCT_OFFER = "offer";
 
+    public static String PRODUCTS_STRING_KEY = "products as string";
+    public static String PRODUCTS_COUNT_STRING_KEY = "product count as string";
+    public static String TOTAL_KEY = "total";
+
     public static String SEARCH_QUERY_KEY = "query";
     public static String PHONE_NO = "+541122537592";
 }

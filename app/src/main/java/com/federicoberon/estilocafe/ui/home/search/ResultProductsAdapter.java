@@ -1,4 +1,4 @@
-package com.federicoberon.estilocafe.ui.home;
+package com.federicoberon.estilocafe.ui.home.search;
 
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_DESC;
@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.model.ProductEntity;
 import com.federicoberon.estilocafe.ui.customview.RatingTextView;
+import com.federicoberon.estilocafe.ui.home.CartEventListener;
+import com.federicoberon.estilocafe.ui.home.detail.ProductDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

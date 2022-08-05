@@ -1,4 +1,4 @@
-package com.federicoberon.estilocafe.ui.home;
+package com.federicoberon.estilocafe.ui.home.search;
 
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
 import static com.federicoberon.estilocafe.utils.Constants.SEARCH_QUERY_KEY;
@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,9 @@ import com.federicoberon.estilocafe.EstiloCafeApplication;
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.databinding.FragmentSearchResultBinding;
 import com.federicoberon.estilocafe.model.ProductEntity;
-import com.federicoberon.estilocafe.model.ProductModel;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.Query;
+import com.federicoberon.estilocafe.ui.home.CartEventListener;
+import com.federicoberon.estilocafe.ui.home.HomeActivity;
+import com.federicoberon.estilocafe.ui.home.HomeViewModel;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class SearchResultFragment extends Fragment implements CartEventListener{
+public class SearchResultFragment extends Fragment implements CartEventListener {
     private static final String LOG_TAG = "<SearchResultFragment>";
     private AlertDialog mDialog;
     private FragmentSearchResultBinding binding;

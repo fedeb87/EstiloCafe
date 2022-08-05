@@ -3,7 +3,10 @@ package com.federicoberon.estilocafe.repository;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_NAME;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_TAGS;
+
+import com.federicoberon.estilocafe.datasource.dao.OrdersDao;
 import com.federicoberon.estilocafe.datasource.dao.ProductsDao;
+import com.federicoberon.estilocafe.model.OrderEntity;
 import com.federicoberon.estilocafe.model.ProductEntity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -25,11 +28,13 @@ import io.reactivex.Maybe;
 @Singleton
 public class ProductsRepository {
     private final ProductsDao mProductsDao;
+    private final OrdersDao mOrdersDao;
     private final CollectionReference mProductCollection;
 
     @Inject
-    public ProductsRepository(ProductsDao productsDao) {
+    public ProductsRepository(ProductsDao productsDao, OrdersDao ordersDao) {
         mProductsDao = productsDao;
+        mOrdersDao = ordersDao;
         mProductCollection = FirebaseFirestore.getInstance().collection("Products");
     }
 
@@ -82,5 +87,17 @@ public class ProductsRepository {
 
     public Flowable<List<String>> getAllCategories() {
         return mProductsDao.getAllCategories();
+    }
+
+    public Flowable<List<String>> getAllProductsIds() {
+        return mProductsDao.getAllProductsIds();
+    }
+
+    public Flowable<List<OrderEntity>> getAllOrders() {
+        return mProductsDao.getAllOrders();
+    }
+
+    public Maybe<Long> saveOrder(OrderEntity order) {
+        return mOrdersDao.insert(order);
     }
 }

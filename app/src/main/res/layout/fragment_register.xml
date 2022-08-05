@@ -277,7 +277,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_button"
-                android:background="@drawable/rounded_button"
+                android:background="@drawable/rounded_view"
                 android:backgroundTint="@color/primaryColor"
                 android:layout_gravity="bottom"
                 android:textColor="@color/white"

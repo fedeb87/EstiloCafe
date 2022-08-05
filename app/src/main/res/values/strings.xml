@@ -148,7 +148,7 @@ Podemos hacer cambios a esta Política de privacidad. Cualquier cambio que podam
 
 Esta aplicación pudiera contener enlaces a otros sitios o documentos que pudieran ser de su interés. Una vez que usted de clic en estos enlaces y abandone nuestra página, ya no tenemos control sobre al sitio al que es redirigido y por lo tanto no somos responsables de los términos o privacidad ni de la protección de sus datos en esos otros sitios terceros. Dichos sitios están sujetos a sus propias políticas de privacidad por lo cual es recomendable que los consulte para confirmar que usted está de acuerdo con estas."</string>
     <string name="terms_of_services_body" tools:ignore="TypographyOther">"
-Estos términos y condiciones de uso (“Términos”) se aplican a la aplicación móvil denominada MeSuena (“Aplicación”) y cualquier documentación que pongamos a su disposición en relación con la Aplicación (“Documentos”).
+Estos términos y condiciones de uso (“Términos”) se aplican a la aplicación móvil denominada EstiloCafe (“Aplicación”) y cualquier documentación que pongamos a su disposición en relación con la Aplicación (“Documentos”).
 
 
 INFORMACIÓN RELEVANTE
@@ -271,12 +271,15 @@ En la medida en que lo permita la ley aplicable, estos Términos, su objeto y su
     <string name="logout_menu">Cerrar Sesión</string>
     <string name="top_scores_menu">Top Scores</string>
     <string name="menu_profile">Mi Perfil</string>
+    <string name="menu_history">Historial</string>
     <string name="description_subtitle">DESCRIPCIÓN</string>
 
     <string name="copyright_string" translatable="false">"Copyright Argentina Federico Beron
 Copyright 2021 - 2022
 All Rights Reserved"</string>
-    <string name="brew_personal_desc">Estoy entusiasmado con las tecnologías móviles. Creador de ideas, curioso y amante de la naturaleza.</string>
+    <string name="brew_commerce_desc">"WS: 11 33176242
+        Email: estilocafe.pilar@gmail.com
+        Direccion: Vergani 827, Pilar, Buenos Aires"</string>
     <string name="heading">Heading</string>
     <string name="subheading">Subheading</string>
     <string name="more_button">More</string>
@@ -307,5 +310,13 @@ All Rights Reserved"</string>
     <string name="error_send_request">Necesita otorgar los permisos suficientes para que el pedido pueda ser enviado</string>
     <string name="new_request">Nuevo pedido - %s</string>
     <string name="empty_button">Empty cart</string>
+    <string name="repeat_button">Repetir</string>
+    <string name="view_button">Ver</string>
+    <string name="order_date">18/12/2022</string>
+    <string name="warning_pricing">Tenga en cuenta</string>
+    <string name="warning_pricing_body">Algunos de los productos podrian haber sufrido actualizaciones en sus precios</string>
+    <string name="error_sending_order">No se pudo enviar el pedido</string>
+    <string name="error_sending_order_body">Algunos de los productos ya no se encuentran disponibles</string>
+    <string name="order_sended">Pedido enviado</string>
 
 </resources>

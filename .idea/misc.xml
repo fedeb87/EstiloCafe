@@ -27,6 +27,7 @@
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/content_home.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_about.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_complete_profile.xml" value="0.35" />
+        <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_history.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_home.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_login.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_product_detail.xml" value="0.35" />
@@ -34,6 +35,7 @@
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_search_result.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_terms_dialog.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/fragment_view_cart.xml" value="0.35" />
+        <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/item_history.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/item_list_cart.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/item_normal_product.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/item_normal_product_result.xml" value="0.35" />
@@ -44,6 +46,7 @@
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/offer_product.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/offer_products.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/product_detail_content.xml" value="0.5" />
+        <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/rounded_button.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/layout/slider_layout_item.xml" value="0.35" />
         <entry key="..\:/Users/Fede/AndroidStudioProjects/EstiloCafe/app/src/main/res/menu/drawer_menu.xml" value="0.35" />
       </map>

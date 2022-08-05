@@ -13,14 +13,14 @@ import com.federicoberon.estilocafe.R;
 public class DialogErrorHelper {
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public static AlertDialog.Builder getErrorRetryDialog(Context context, String title, String body){
+    public static AlertDialog.Builder getWarningDialog(Context context, String title, String body, DialogInterface.OnClickListener listener){
         return new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(body)
                 //.setMessage("Are you sure you want to delete this entry?")
 
                 // A null listener allows the button to dismiss the dialog and take no further action.
-                .setNegativeButton(R.string.ok_string, (DialogInterface.OnClickListener) context)
+                .setNegativeButton(R.string.ok_string, listener)
                 .setIcon(context.getResources().getDrawable(
                         R.drawable.ic_warning));
     }

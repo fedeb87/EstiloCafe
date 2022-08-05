@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.federicoberon.estilocafe.BaseViewModel;
 import com.federicoberon.estilocafe.EstiloCafeApplication;
+import com.federicoberon.estilocafe.model.OrderEntity;
 import com.federicoberon.estilocafe.model.ProductEntity;
 import com.federicoberon.estilocafe.repository.AuthRepository;
 import com.federicoberon.estilocafe.repository.ProductsRepository;
@@ -49,6 +50,8 @@ public class HomeViewModel extends BaseViewModel {
     // id, cantidad
     private HashMap<Long, Integer> carrito;
     private float total;
+    private String emailBody;
+    private OrderEntity mOrder;
 
     @Inject
     public HomeViewModel(AuthRepository authRepository,
@@ -263,5 +266,33 @@ public class HomeViewModel extends BaseViewModel {
     public void emptyCart() {
         carrito = new HashMap<>();
         total = 0;
+    }
+
+    public Flowable<List<OrderEntity>> getAllOrders(){
+        return mProductsRepository.getAllOrders();
+    }
+
+    public Flowable<List<String>> getAllProductsIds() {
+        return mProductsRepository.getAllProductsIds();
+    }
+
+    public Maybe<Long> saveOrder(OrderEntity order) {
+        return mProductsRepository.saveOrder(order);
+    }
+
+    public void setEmailBody(String productsToBody) {
+        this.emailBody = productsToBody;
+    }
+
+    public String getEmailBody() {
+        return emailBody;
+    }
+
+    public void setOrder(OrderEntity order) {
+        this.mOrder = order;
+    }
+
+    public OrderEntity getOrder() {
+        return mOrder;
     }
 }
