@@ -93,11 +93,11 @@ public class HomeFragment extends Fragment implements CartEventListener{
     @Override
     public void onResume() {
         super.onResume();
+        ((HomeActivity)requireActivity()).clearSearchView();
         loadMainItemsData();
     }
 
     private void loadMainItemsData() {
-
         mDisposable.add(mViewModel.getAllCategories()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

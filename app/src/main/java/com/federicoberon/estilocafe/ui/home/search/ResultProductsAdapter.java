@@ -75,6 +75,8 @@ public class ResultProductsAdapter extends RecyclerView.Adapter<ResultProductsAd
             holder.t_count.setText(String.valueOf(listener.getProductCount(product.getId())));
         });
 
+        holder.t_count.setText(String.valueOf(listener.getProductCount(product.getId())));
+
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, ProductDetailActivity.class);
             intent.putExtra(PRODUCT_KEY, product.getId());
@@ -82,7 +84,7 @@ public class ResultProductsAdapter extends RecyclerView.Adapter<ResultProductsAd
             intent.putExtra(PRODUCT_NAME, product.getName());
             intent.putExtra(PRODUCT_CAT, product.getCategory());
             intent.putExtra(PRODUCT_DESC, product.getDescription());
-            intent.putExtra(PRODUCT_PRICING, product.getPricingString());
+            intent.putExtra(PRODUCT_PRICING, product.getPrice());
             intent.putExtra(PRODUCT_RATING, product.getRating());
             intent.putExtra(PRODUCT_OFFER, product.getOffer());
             intent.putExtra(PRODUCT_IMAGES, product.getImages());

@@ -158,6 +158,7 @@ public class HistoryFragment extends Fragment implements HistoryEventListener, D
         EmailUtils.sendMessage(mViewModel.getEmailBody(),
                 String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " ")));
 
+        Toast.makeText(requireContext(), getString(R.string.order_sended), Toast.LENGTH_LONG).show();
         mDisposable.add(mViewModel.saveOrder(mViewModel.getOrder())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

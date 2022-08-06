@@ -270,4 +270,9 @@ public class HomeActivity extends AppCompatActivity {
         binding.appBarMain.tTotalPrice.setText(String.valueOf(mViewModel.getTotal()));
         binding.appBarMain.tCartCount.setText(String.valueOf(mViewModel.getCartCount()));
     }
+
+    public void clearSearchView() {
+        binding.appBarMain.searchView.clearQuery();
+        binding.appBarMain.searchView.clearSearchFocus();
+    }
 }

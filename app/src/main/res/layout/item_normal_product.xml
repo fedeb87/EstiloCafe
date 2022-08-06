@@ -82,11 +82,11 @@
                 android:layout_alignTop="@+id/ImageViewPlus"
                 android:layout_alignBottom="@+id/ImageViewPlus"
                 android:layout_toStartOf="@+id/ImageViewPlus"
-                android:hint="@string/_0"
-                android:textColor="@color/grey_text"
                 android:gravity="center"
+                android:hint="@string/_0"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/grey_text"
                 android:textSize="16sp" />
 
             <ImageView

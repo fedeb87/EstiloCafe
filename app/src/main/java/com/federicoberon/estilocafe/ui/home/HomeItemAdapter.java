@@ -44,9 +44,7 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.Normal
 
         String headerString = mArrayList.get(position);
 
-        // setting the horizontal recyclerviews
         if (headerString != null) {
-
             ((NormalViewHolder) holder).tv_card_header.setText(mArrayList.get(position));
 
             ((NormalViewHolder) holder).main_item_app_recycler_view.setHasFixedSize(true);
@@ -55,7 +53,6 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.Normal
 
             ((NormalViewHolder) holder).headerLayout.setOnClickListener(view ->
                     ((HomeActivity)mContext).searchManagement(null, mArrayList.get(position)));
-
 
             NormalProductAdapter normalProductAdapter = new NormalProductAdapter(new ArrayList<>(), mContext, parentFragment);
             ((NormalViewHolder) holder).main_item_app_recycler_view.setAdapter(normalProductAdapter);

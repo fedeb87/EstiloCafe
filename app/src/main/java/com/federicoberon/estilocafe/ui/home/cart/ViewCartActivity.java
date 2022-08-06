@@ -6,7 +6,10 @@ import static com.federicoberon.estilocafe.utils.Constants.PRODUCTS_STRING_KEY;
 import static com.federicoberon.estilocafe.utils.Constants.TOTAL_KEY;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,6 +25,8 @@ import com.federicoberon.estilocafe.utils.OrdersHelper;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+
 import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -58,23 +63,34 @@ public class ViewCartActivity extends AppCompatActivity implements CartListAdapt
 
         // if are a repeated order
         if(getIntent().hasExtra(TOTAL_KEY)){
+            float total = getIntent().getFloatExtra(TOTAL_KEY, 0);
             ArrayList<ProductEntity> products = OrdersHelper.stringToProductList(getIntent().getStringExtra(PRODUCTS_STRING_KEY));
             HashMap<Long, Integer> carrito = OrdersHelper.stringToProductCount(getIntent().getStringExtra(PRODUCTS_COUNT_STRING_KEY));
 
             binding.productsList.setAdapter(new CartListAdapter(products, carrito,this, this));
             binding.emptyButton.setVisibility(View.GONE);
-            binding.textViewTotalFinal.setText(String.format("$ %s", getIntent().getFloatExtra(TOTAL_KEY, 0)));
-        }else
-            mDisposable.add(mViewModel.getCartProducts()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(products -> {
-                    binding.productsList.setAdapter(new CartListAdapter(products, mViewModel.getCart(),this, this));
-                    binding.emptyButton.setOnClickListener(view -> emptyCart());
-                    updateValues();
-            }));
+            binding.textViewTotalFinal.setText(String.format("$ %s", total));
 
-        binding.sendButton.setOnClickListener(view -> cartToBody());
+            binding.sendButton.setOnClickListener(view -> {
+                EmailUtils.sendMessage(EmailUtils.productsToBody(products, carrito, total),
+                        String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " ")));
+                Toast.makeText(this, getString(R.string.order_sended), Toast.LENGTH_LONG).show();
+                // save order
+                saveOrderToDatabase(products, total, carrito);
+                finish();
+            });
+        }else {
+            mDisposable.add(mViewModel.getCartProducts()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(products -> {
+                        binding.productsList.setAdapter(new CartListAdapter(products, mViewModel.getCart(), this, this));
+                        binding.emptyButton.setOnClickListener(view -> emptyCart());
+                        updateValues();
+                    }));
+
+            binding.sendButton.setOnClickListener(view -> cartToBody());
+        }
     }
 
     private void emptyCart() {
@@ -90,26 +106,30 @@ public class ViewCartActivity extends AppCompatActivity implements CartListAdapt
                 String text = EmailUtils.productsToBody(products, mViewModel.getCart(), mViewModel.getTotal());
                 EmailUtils.sendMessage(text,
                         String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " ")));
-
-                // save order
-                OrderEntity order = new OrderEntity();
-                order.setDate(new Date());
-
-                String title = products.get(0).getName();
-                for(int i = 1;i<products.size(); i++)
-                    title.concat(", ").concat(products.get(i).getName());
-                order.setTitle(title);
-                order.setTotal(mViewModel.getTotal());
-                order.setProductsList(OrdersHelper.productListToString(new ArrayList<>(products)));
-                order.setProductsCant(OrdersHelper.carritoToString(mViewModel.getCart()));
-                mDisposable.add(mViewModel.saveOrder(order)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(orderId -> {})
-                );
+                Toast.makeText(this, getString(R.string.order_sended), Toast.LENGTH_LONG).show();
+                saveOrderToDatabase(products, mViewModel.getTotal(), mViewModel.getCart());
                 mViewModel.emptyCart();
         }));
         finish();
+    }
+
+    private void saveOrderToDatabase(List<ProductEntity> products, float total, HashMap<Long, Integer> cart) {
+        // save order
+        OrderEntity order = new OrderEntity();
+        order.setDate(new Date());
+
+        String title = products.get(0).getName();
+        for(int i = 1;i<products.size(); i++)
+            title.concat(", ").concat(products.get(i).getName());
+        order.setTitle(title);
+        order.setTotal(total);
+        order.setProductsList(OrdersHelper.productListToString(new ArrayList<>(products)));
+        order.setProductsCant(OrdersHelper.carritoToString(cart));
+        mDisposable.add(mViewModel.saveOrder(order)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(orderId -> {})
+        );
     }
 
     private void updateValues() {
