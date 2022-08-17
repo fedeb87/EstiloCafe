@@ -45,7 +45,7 @@ public class AboutFragment extends Fragment {
 
     private void loadAbout() {
         AboutBuilder builder = AboutBuilder.with(requireActivity())
-                .setAppIcon(R.mipmap.ic_launcher)
+                .setAppIcon(R.mipmap.ic_icono)
                 .setAppName(R.string.app_name)
                 .setLinksAnimated(true)
                 .setDividerDashGap(12)

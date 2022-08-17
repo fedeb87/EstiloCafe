@@ -16,9 +16,9 @@
         tools:ignore="UselessParent">
 
         <ImageView
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:src="@mipmap/ic_launcher"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:src="@mipmap/ic_icono_foreground"
             android:contentDescription="@string/desc" />
 
         <TextView
