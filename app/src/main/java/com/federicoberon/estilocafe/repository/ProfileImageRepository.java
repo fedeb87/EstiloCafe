@@ -1,17 +1,12 @@
 package com.federicoberon.estilocafe.repository;
 
-import static com.federicoberon.estilocafe.utils.Constants.ENABLE_LOGS;
-
 import android.content.Context;
-import android.util.Log;
-
 import com.federicoberon.estilocafe.utils.CompressorBitmapImage;
 import com.federicoberon.estilocafe.utils.StorageUtil;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.io.File;
 import java.util.Date;
 

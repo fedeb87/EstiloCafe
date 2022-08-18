@@ -14,6 +14,8 @@ import com.federicoberon.estilocafe.di.DaggerApplicationComponent;
 import com.federicoberon.estilocafe.di.module.ApplicationModule;
 import com.federicoberon.estilocafe.di.module.DatabaseModule;
 import com.federicoberon.estilocafe.utils.NetworkMonitoringUtil;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
@@ -22,6 +24,8 @@ public class EstiloCafeApplication extends Application {
     private Scheduler defaultSubscribeScheduler;
 
     public NetworkMonitoringUtil mNetworkMonitoringUtil;
+
+    public CollectionReference productCollection;
 
     // Reference to the application graph that is used across the whole app
     public ApplicationComponent appComponent = initializeComponent();
@@ -35,6 +39,7 @@ public class EstiloCafeApplication extends Application {
         mNetworkMonitoringUtil = new NetworkMonitoringUtil(getApplicationContext());
         mNetworkMonitoringUtil.checkNetworkState();
         mNetworkMonitoringUtil.registerNetworkCallbackEvents();
+        productCollection = FirebaseFirestore.getInstance().collection("Products");
     }
 
     public ApplicationComponent initializeComponent() {

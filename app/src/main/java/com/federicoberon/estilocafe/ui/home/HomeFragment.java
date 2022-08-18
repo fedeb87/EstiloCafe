@@ -1,38 +1,29 @@
 package com.federicoberon.estilocafe.ui.home;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.federicoberon.estilocafe.EstiloCafeApplication;
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.databinding.FragmentHomeBinding;
 import com.federicoberon.estilocafe.model.ProductEntity;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
-import dmax.dialog.SpotsDialog;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class HomeFragment extends Fragment implements CartEventListener{
-    private static final String LOG_TAG = "<<< HomeFragment >>>";
-    private AlertDialog mDialog;
     private FragmentHomeBinding binding;
     private HomeItemAdapter homeItemAdapter;
     private final CompositeDisposable mDisposable = new CompositeDisposable();
@@ -55,11 +46,6 @@ public class HomeFragment extends Fragment implements CartEventListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDialog = new SpotsDialog.Builder()
-                .setContext(requireContext())
-                .setMessage(getResources().getString(
-                        R.string.wait_msg))
-                .setCancelable(false).build();
 
         requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -81,7 +67,6 @@ public class HomeFragment extends Fragment implements CartEventListener{
         binding.forYouRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.forYouRecyclerView.setLayoutManager(layoutManager);
-        //loadMainItemsData();
     }
 
     @Override

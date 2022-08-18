@@ -11,13 +11,11 @@ import com.federicoberon.estilocafe.model.ProductEntity;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -32,10 +30,10 @@ public class ProductsRepository {
     private final CollectionReference mProductCollection;
 
     @Inject
-    public ProductsRepository(ProductsDao productsDao, OrdersDao ordersDao) {
+    public ProductsRepository(ProductsDao productsDao, OrdersDao ordersDao, CollectionReference productCollection) {
         mProductsDao = productsDao;
         mOrdersDao = ordersDao;
-        mProductCollection = FirebaseFirestore.getInstance().collection("Products");
+        mProductCollection = productCollection;
     }
 
     public Query getRemoteProducts(){
@@ -94,7 +92,7 @@ public class ProductsRepository {
     }
 
     public Flowable<List<OrderEntity>> getAllOrders() {
-        return mProductsDao.getAllOrders();
+        return mOrdersDao.getAllOrders();
     }
 
     public Maybe<Long> saveOrder(OrderEntity order) {

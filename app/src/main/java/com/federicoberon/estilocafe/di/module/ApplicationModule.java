@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 
 import com.federicoberon.estilocafe.EstiloCafeApplication;
 import com.federicoberon.estilocafe.di.ApplicationContext;
+import com.google.firebase.firestore.CollectionReference;
 
 import javax.inject.Singleton;
 
@@ -38,6 +39,12 @@ public class ApplicationModule {
     @Singleton
     public SharedPreferences provideSharedPrefs() {
         return PreferenceManager.getDefaultSharedPreferences(mApplication);
+    }
+
+    @Provides
+    @Singleton
+    public CollectionReference provideProductsCollection() {
+        return mApplication.productCollection;
     }
 }
 

@@ -1,8 +1,7 @@
 package com.federicoberon.estilocafe.ui.home.history;
 
+import static com.federicoberon.estilocafe.utils.Constants.ENABLE_LOGS;
 import static com.federicoberon.estilocafe.utils.Constants.NICKNAME_KEY;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCTS_COUNT_STRING_KEY;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCTS_STRING_KEY;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,10 +30,8 @@ import com.federicoberon.estilocafe.utils.EmailUtils;
 import com.federicoberon.estilocafe.utils.OrdersHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.inject.Inject;
 import dmax.dialog.SpotsDialog;
@@ -156,7 +152,7 @@ public class HistoryFragment extends Fragment implements HistoryEventListener, D
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
         EmailUtils.sendMessage(mViewModel.getEmailBody(),
-                String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " ")));
+                String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " ")), sharedPref.getBoolean(ENABLE_LOGS, false));
 
         Toast.makeText(requireContext(), getString(R.string.order_sended), Toast.LENGTH_LONG).show();
         mDisposable.add(mViewModel.saveOrder(mViewModel.getOrder())

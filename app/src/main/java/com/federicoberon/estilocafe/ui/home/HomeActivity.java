@@ -1,5 +1,6 @@
 package com.federicoberon.estilocafe.ui.home;
 
+import static com.federicoberon.estilocafe.utils.Constants.ENABLE_LOGS;
 import static com.federicoberon.estilocafe.utils.Constants.NICKNAME_KEY;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
 import static com.federicoberon.estilocafe.utils.Constants.SEARCH_QUERY_KEY;
@@ -12,7 +13,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -33,10 +33,8 @@ import com.federicoberon.estilocafe.ui.home.search.SearchResultFragment;
 import com.federicoberon.estilocafe.ui.login.LoginActivity;
 import com.federicoberon.estilocafe.utils.NetworkChangeReceiver;
 import com.federicoberon.estilocafe.utils.NetworkStateManager;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -49,6 +47,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final String LOG_TAG = "< HomeActivity >";
     private ActivityHomeBinding binding;
     private DrawerLayout drawer;
     private AppBarConfiguration mAppBarConfiguration;
@@ -128,25 +127,23 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         ArrayList<ProductEntity> productsList = new ArrayList<>();
-        mViewModel.getAll().get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(@NonNull QuerySnapshot queryDocumentSnapshots) {
-                for (DocumentSnapshot d : queryDocumentSnapshots.getDocuments()) {
-                    if (d.exists()) {
-                        ProductModel productModel = d.toObject(ProductModel.class);
-                        assert productModel != null;
-                        productModel.setProductID(d.getId());
-                        productsList.add(convertToRoomProduct(productModel));
-                    }
+        mViewModel.getAll().get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (DocumentSnapshot d : queryDocumentSnapshots.getDocuments()) {
+                if (d.exists()) {
+                    ProductModel productModel = d.toObject(ProductModel.class);
+                    assert productModel != null;
+                    productModel.setProductID(d.getId());
+                    productsList.add(convertToRoomProduct(productModel));
                 }
-                mDisposable.add(mViewModel.insertAllProducts(productsList)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(products -> {
-                        Log.w("MIO", "<<<HomeActivity>>> - cantidad de productos insertados " + products.size());
-                    })
-                );
             }
+            mDisposable.add(mViewModel.insertAllProducts(productsList)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(products -> {
+                    if(sharedPref.getBoolean(ENABLE_LOGS, false))
+                        Log.w(LOG_TAG, "Inserted products: " + products.size());
+                })
+            );
         });
 
         if(mViewModel.getCartCount()>0)
@@ -235,8 +232,6 @@ public class HomeActivity extends AppCompatActivity {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (Objects.equals(getForegroundFragment(), HomeFragment.class)) finish();
-                //Navigation.findNavController(binding.getRoot()).navigate(R.id.action_back_home);
-
             super.onBackPressed();
         }
     }
@@ -255,10 +250,6 @@ public class HomeActivity extends AppCompatActivity {
 
     public ActivityHomeBinding getBinding() {
         return binding;
-    }
-
-    public NavController getNavController() {
-        return navController;
     }
 
     public void updateCartBanner() {

@@ -30,14 +30,12 @@ public class NetworkMonitoringUtil extends ConnectivityManager.NetworkCallback {
     @Override
     public void onAvailable(@NonNull Network network) {
         super.onAvailable(network);
-        Log.d(TAG, "onAvailable() called: Connected to network");
         mNetworkStateManager.setNetworkConnectivityStatus(true);
     }
 
     @Override
     public void onLost(@NonNull Network network) {
         super.onLost(network);
-        Log.e(TAG, "onLost() called: with: Lost network connection");
         mNetworkStateManager.setNetworkConnectivityStatus(false);
     }
 
@@ -46,7 +44,6 @@ public class NetworkMonitoringUtil extends ConnectivityManager.NetworkCallback {
      * (Note: Register only once to prevent duplicate callbacks)
      */
     public void registerNetworkCallbackEvents() {
-        Log.d(TAG, "registerNetworkCallbackEvents() called");
         mConnectivityManager.registerNetworkCallback(mNetworkRequest, this);
     }
 

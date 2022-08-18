@@ -1,12 +1,12 @@
 package com.federicoberon.estilocafe.ui.home.cart;
 
+import static com.federicoberon.estilocafe.utils.Constants.ENABLE_LOGS;
 import static com.federicoberon.estilocafe.utils.Constants.NICKNAME_KEY;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCTS_COUNT_STRING_KEY;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCTS_STRING_KEY;
 import static com.federicoberon.estilocafe.utils.Constants.TOTAL_KEY;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -73,7 +73,8 @@ public class ViewCartActivity extends AppCompatActivity implements CartListAdapt
 
             binding.sendButton.setOnClickListener(view -> {
                 EmailUtils.sendMessage(EmailUtils.productsToBody(products, carrito, total),
-                        String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " ")));
+                        String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " "))
+                        , sharedPref.getBoolean(ENABLE_LOGS, false));
                 Toast.makeText(this, getString(R.string.order_sended), Toast.LENGTH_LONG).show();
                 // save order
                 saveOrderToDatabase(products, total, carrito);
@@ -105,7 +106,7 @@ public class ViewCartActivity extends AppCompatActivity implements CartListAdapt
             .subscribe(products -> {
                 String text = EmailUtils.productsToBody(products, mViewModel.getCart(), mViewModel.getTotal());
                 EmailUtils.sendMessage(text,
-                        String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " ")));
+                        String.format(getString(R.string.new_request), sharedPref.getString(NICKNAME_KEY, " ")), sharedPref.getBoolean(ENABLE_LOGS, false));
                 Toast.makeText(this, getString(R.string.order_sended), Toast.LENGTH_LONG).show();
                 saveOrderToDatabase(products, mViewModel.getTotal(), mViewModel.getCart());
                 mViewModel.emptyCart();

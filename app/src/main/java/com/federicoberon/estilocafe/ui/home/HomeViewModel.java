@@ -89,7 +89,6 @@ public class HomeViewModel extends BaseViewModel {
             else
                 carrito.remove(id);
             total = total>=price?total-price:0;
-            Log.w("MIO", "TOTALLLLL::::: " + total);
         }
     }
 

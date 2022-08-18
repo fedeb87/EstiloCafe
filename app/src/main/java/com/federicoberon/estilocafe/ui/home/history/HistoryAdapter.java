@@ -2,21 +2,11 @@ package com.federicoberon.estilocafe.ui.home.history;
 
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCTS_COUNT_STRING_KEY;
 import static com.federicoberon.estilocafe.utils.Constants.PRODUCTS_STRING_KEY;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_CAT;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_DESC;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_FIREBASE_KEY;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_IMAGES;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_KEY;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_NAME;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_OFFER;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_PRICING;
-import static com.federicoberon.estilocafe.utils.Constants.PRODUCT_RATING;
 import static com.federicoberon.estilocafe.utils.Constants.TOTAL_KEY;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.federicoberon.estilocafe.R;
 import com.federicoberon.estilocafe.model.OrderEntity;
-import com.federicoberon.estilocafe.ui.home.CartEventListener;
 import com.federicoberon.estilocafe.ui.home.cart.ViewCartActivity;
-import com.federicoberon.estilocafe.ui.home.detail.ProductDetailActivity;
 import com.federicoberon.estilocafe.utils.OrdersHelper;
 
 import java.util.ArrayList;

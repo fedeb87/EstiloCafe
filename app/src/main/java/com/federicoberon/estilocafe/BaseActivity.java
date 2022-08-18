@@ -6,11 +6,9 @@ import androidx.navigation.Navigation;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 
 import com.federicoberon.estilocafe.ui.home.HomeActivity;
-import com.federicoberon.estilocafe.ui.login.LoginActivity;
 
 import javax.inject.Inject;
 

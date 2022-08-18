@@ -8,7 +8,6 @@ import com.federicoberon.estilocafe.datasource.dao.OrdersDao;
 import com.federicoberon.estilocafe.datasource.dao.ProductsDao;
 import com.federicoberon.estilocafe.model.OrderEntity;
 import com.federicoberon.estilocafe.model.ProductEntity;
-import com.federicoberon.estilocafe.model.ProductModel;
 
 /**
  * The Room database that contains the Questions table

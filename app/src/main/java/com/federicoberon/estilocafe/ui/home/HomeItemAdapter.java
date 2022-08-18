@@ -1,5 +1,7 @@
 package com.federicoberon.estilocafe.ui.home;
 
+import static com.federicoberon.estilocafe.utils.Constants.ENABLE_LOGS;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
@@ -12,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.federicoberon.estilocafe.R;
-import com.federicoberon.estilocafe.model.ProductEntity;
 
 import java.util.ArrayList;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -65,10 +66,9 @@ public class HomeItemAdapter extends RecyclerView.Adapter<HomeItemAdapter.Normal
                                     return;
                                 normalProductAdapter.setData(new ArrayList<>(products));
                             },
-                            throwable -> {
-                                //if(sharedPref.getBoolean(ENABLE_LOGS, false))
-                                    Log.e("MIO", "Unable to get alarms: ", throwable);
-                            });
+                            throwable ->
+                            Log.e("MIO", "Unable to get alarms: ", throwable)
+                            );
 
         }
     }

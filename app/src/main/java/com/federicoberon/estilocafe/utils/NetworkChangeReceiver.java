@@ -47,17 +47,14 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
             if (info != null) {
                 for (int i = 0; i < info.length; i++) {
                     if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                        if(!isConnected){
-                            Log.v(LOG_TAG, "------- Now you are connected to Internet!");
+                        if(!isConnected)
                             isConnected = true;
-                        }
+
                         return true;
                     }
                 }
             }
         }
-        Log.v(LOG_TAG, "------- You are not connected to Internet!");
-
         isConnected = false;
         return false;
     }

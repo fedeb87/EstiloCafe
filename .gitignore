@@ -77,4 +77,3 @@ lint/tmp/
 *.hprof
 
 # Firebase settings
-/app/google-services.json

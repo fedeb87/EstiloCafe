@@ -13,10 +13,10 @@ import javax.mail.MessagingException;
 
 public class EmailUtils {
 
-    public static void sendMessage(String body, String subject) {
-        SendEmailAsyncTask email = new SendEmailAsyncTask();
-        email.m = new Mail("mipajarito2021@gmail.com", "iaknjfoybdyjthgw");
-        email.m.set_from("mipajarito2021@gmail.com");
+    public static void sendMessage(String body, String subject, boolean enableLogs) {
+        SendEmailAsyncTask email = new SendEmailAsyncTask(enableLogs);
+        email.m = new Mail("customEmail@gmail.com", "iaknjfoybdyjthgw");
+        email.m.set_from("customEmail@gmail.com");
         email.m.setBody(body);
         email.m.set_to(new String[] {"estilocafe.pilar@gmail.com"});
         email.m.set_subject(subject);
@@ -24,29 +24,34 @@ public class EmailUtils {
     }
 
     static class SendEmailAsyncTask extends AsyncTask<Void, Void, Boolean> {
+        private final boolean enableLogs;
         Mail m;
 
-        public SendEmailAsyncTask() {
+        public SendEmailAsyncTask(boolean enableLogs) {
+            this.enableLogs = enableLogs;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
-                if (m.send()) {
-                    Log.w("MIO", "Email sent");
-                } else {
-                    Log.w("MIO", "Error sending email");
-                }
-
+                if (m.send())
+                    if(enableLogs)
+                        Log.w("MIO", "Email sent");
+                else
+                    if(enableLogs)
+                        Log.w("MIO", "Error sending email");
                 return true;
             } catch (AuthenticationFailedException e) {
-                Log.e("MIO", "Authentication failed", e);
+                if(enableLogs)
+                    Log.e("MIO", "Authentication failed", e);
                 return false;
             } catch (MessagingException e) {
-                Log.e("MIO", "Email failed", e);
+                if(enableLogs)
+                    Log.e("MIO", "Email failed", e);
                 return false;
             } catch (Exception e) {
-                Log.e("MIO", "Unexpected error occured", e);
+                if(enableLogs)
+                    Log.e("MIO", "Unexpected error occured", e);
                 return false;
             }
         }
