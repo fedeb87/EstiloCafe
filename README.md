@@ -17,7 +17,7 @@ This project requires the following
 ## Screenshots
 The screenshot below shows how the app looks like when it is done.
 
-![](https://i.imgur.com/QbWnzV1.png =300x600)   ![Imgur](https://i.imgur.com/nI4tJrz.png =300x600)   ![Imgur](https://i.imgur.com/YY7GNj0.png =300x600)   ![Imgur](https://i.imgur.com/rZQ1sy4.png =300x600)   ![Imgur](https://i.imgur.com/h9Vkqtr.png =300x600)
+![<img width="300" alt="SC1" src="https://i.imgur.com/QbWnzV1.png">](https://i.imgur.com/QbWnzV1.png =300x600)   ![<img width="300" alt="SC1" src="https://i.imgur.com/nI4tJrz.png">](https://i.imgur.com/nI4tJrz.png =300x600)   ![<img width="300" alt="SC1" src="https://i.imgur.com/YY7GNj0.png">](https://i.imgur.com/YY7GNj0.png =300x600)   ![<img width="300" alt="SC1" src="https://i.imgur.com/rZQ1sy4.png">](https://i.imgur.com/rZQ1sy4.png =300x600)   ![<img width="300" alt="SC1" src="https://i.imgur.com/h9Vkqtr.png">](https://i.imgur.com/h9Vkqtr.png =300x600)
 
 ### Libraries
 
